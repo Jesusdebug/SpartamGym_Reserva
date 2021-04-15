@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        <div class="container-fluid" style="margin-top:50px; text-align: center">
+
+         
+            <div class="card" style="width: 40rem; margin: 20px; float: left">
+                <img src="..." class="card-img-top" alt="..."/>
+                <div class="card-body">
+                    <h:form >
+                        <div class="input-group mb-3">
+                            <h:inputText required="true" requiredMessage="En campo tipo es requerido" class="form-control" html5:placeholder="Tipo" value="#{agendarView.regAgenda.tipo}"/>
+                        </div>
+                        <div class="input-group mb-3">
+                            <h:inputText required="true" requiredMessage="En campo Nombre es requerido" class="form-control" html5:placeholder="Nombre" value="#{agendarView.regAgenda.nombre}"/>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <h:inputText  html5:type="date"  required="true" requiredMessage="En campo Fecha es requerido" class="form-control" html5:placeholder="Fecha" value="#{agendarView.regAgenda.fecha}"/>
+                        </div>
+                        <div class="input-group mb-3">
+                            <h:inputText  html5:type="time"  required="true" requiredMessage="En campo Hora es requerido" class="form-control" html5:placeholder="Hora" value="#{agendarView.regAgenda.hora}"/>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <h:inputText required="true" requiredMessage="En campo Lugar es requerido" class="form-control" html5:placeholder="Lugar" value="#{agendarView.regAgenda.lugar}"/>
+                        </div>
+ 
+                        <h:selectOneMenu value="#{eventosView.listaEventos}" class="form-control">
+                            <f:selectItems itemLabel="##{eventosView.nombre}" itemValue="#{eventosView.listaEventos}" value="#{eventosView.listaEventos}" >
+                            </f:selectItems>
+                        </h:selectOneMenu>
+                      
+                        <h:selectOneMenu value="#{eventosView.listAdministradores}" class="form-control">
+                             <f:selectItems itemLabel="#{idAdemin.usuariosIdusuarios.nombres}" itemValue="#{idAdemin.idadministrador}" var="idAdemin" value="#{eventosView.listAdministradores}">
+                            </f:selectItems>
+                        </h:selectOneMenu>
+                        <h:selectOneMenu value="#{eventosView.listEntrenadores}" class="form-control">
+                             <f:selectItems itemLabel="#{idEntrenador.usuariosIdusuarios.nombres}" itemValue="#{idEntrenador.usuariosIdusuarios}" var="idEntrenador" value="#{eventosView.listAdministradores}">
+                            </f:selectItems>
+                        </h:selectOneMenu>
+                        <div class="input-group mb-3">
+                            <h:commandButton value="registrar" action="#{agendarView.crearAgenda()}" class="btn btn-primary"></h:commandButton>
+                        </div>
+                    </h:form>
+                 </div>
+            </div>  
+
+            <!--            modal registrar eventos-->
+            <div class="modal" tabindex="-1" role="dialog" id="exampleModalEventos">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Registrar evento</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+        <c:forEach  items="#{entrenadorView.listRutina}" var="rutina">
+            <div class="card" style="width: 18rem; margin: 20px; float: left">
+                <img src="..." class="card-img-top" alt="..."/>
+                <div class="card-body">
+                    <h5 class="card-title"> #{rutina.nombre}</h5>
+                    <p class="card-text">#{rutina.descripcion}</p>
+                    <p class="card-text">#{rutina.duracion}</p>
+                    <p class="card-text">#{rutina.hora}</p>
+                    <h:form>
+                        <h:commandButton  html5:data-toggle="modal" html5:data-target="#exampleModal" class="btn btn-danger" value="Agendar">
+                            <f:ajax></f:ajax>
+                        </h:commandButton>
+                    </h:form>
+                </div>
+            </div>  
+
+        </c:forEach>
+        <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Unirse Al evento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Identidad</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <h:commandButton value="Agendar" class="btn btn-danger"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>

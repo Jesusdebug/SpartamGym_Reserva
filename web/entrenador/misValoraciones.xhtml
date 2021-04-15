@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition>
+        <div class="container-fluid" style="margin-top:30px">
+            <table class="table table-dark table-striped">
+                <caption>List of users</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Nombre Cliente</th>
+                        <th scope="col">Mi Calificacion</th>
+                        <th scope="col">Observaciones</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">
+                            <select class="form-select  table table-danger" aria-label="Default select example">
+                                <option value="1">Selecciones el area a Calificar</option>
+                                <option value="1">1. Entrenador</option>
+                                <option value="2">2. Sesion de Entrenamiento</option>
+                                <option value="3">3. Maquinas</option>
+                                <option value="3">----</option>
+                            </select>
+                        </td>
+                        <td scope="row">Entrenador</td>
+                        <td>
+                            <select class="form-select  table table-danger" aria-label="Default select example">
+                                <option value="1">Elige la calificacion de 1 a 5</option>
+                                <option value="1">1. Mal</option>
+                                <option value="2">2. Regular</option>
+                                <option value="3">3. Bien</option>
+                                <option value="3">4. Excelente</option>
+                            </select>
+                        </td>
+                        <td>Es muy arrogante, queremos un cambio</td>
+                     
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </ui:composition>
+</html>

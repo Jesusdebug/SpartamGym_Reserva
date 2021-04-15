@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+
+        <div class="container" style="margin-top:30px; text-align: center">
+            <h:form>
+                <table class="table table-danger table-striped" id="tablaUsuarios">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center"><h3>Agenda de Eventos</h3></th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Lugar</th>
+                            <th scope="col">Tiemmpo de duracion</th>
+                        </tr>
+                    </thead>
+                    <c:forEach items="#{eventosView.listaEventos}" var="evento">
+                        <tbody>
+                            <tr>
+                                <th>#{evento.nombre}</th>
+                                <th>#{evento.descripcion}</th>
+                                <th>#{evento.fecha}</th>
+                                <th>#{evento.lugar}</th>
+                                <td>#{evento.tiempoduracion}</td>
+                            </tr>
+                        </tbody>
+
+                    </c:forEach>
+                </table>
+            </h:form>
+            <!--            calendario de rutinas de los entrenadores-->
+            <h:form style="margin: 10px">
+                <table class="table table-danger table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo de rutina</th>
+                            <th scope="col">Nombre de la rutina</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Duracion</th>
+                            <th scope="col">Agenda</th>
+                            <th scope="col">Hora</th>
+
+                        </tr>
+                    </thead>
+                    <c:forEach items="#{entrenadorView.listRutina}" var="rutina">
+                        <tbody>
+                            <tr>
+                                <th>#{rutina.tipoRutina}</th>
+                                <th>#{rutina.nombre}</th>
+                                <th>#{rutina.descripcion}</th>
+                                <th>#{rutina.duracion}</th>
+                                <td>#{rutina.agendaIdagenda.fecha}</td>
+                                <td>#{rutina.hora}</td>
+                            </tr>
+                        </tbody>
+                    </c:forEach>
+                </table>
+            </h:form>
+        </div>
+
+    </ui:composition>
+</html>

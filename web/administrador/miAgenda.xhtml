@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    //cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css<ui:composition template="../WEB-INF/Template/tema.xhtml">
+        <ui:define name="head">
+             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+               <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <ui:include src="head.xhtml"></ui:include>
+        </ui:define>
+
+
+        <ui:define name="body">
+            <ui:include src="agendar.xhtml"></ui:include>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#tablaUsuarios').DataTable({
+                        "language": {
+                            "lengthMenu": "Ver _MENU_ registros por pagina",
+                            "zeroRecords": "No funciona - disculpas",
+                            "info": "Pagina _PAGE_ de _PAGES_",
+                            "infoEmpty": "No se encontraron registros",
+                            "infoFiltered": "(filtered from _MAX_ total records)"
+                        }
+                    });
+                });
+            </script>
+        </ui:define>
+
+
+    </ui:composition>
+</html>
+

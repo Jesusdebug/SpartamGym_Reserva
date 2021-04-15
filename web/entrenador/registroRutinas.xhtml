@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+        <h:form>
+            <div class="container-fluid" style="margin-top:30px; text-align: center">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#RegistroDeRutinas">
+                    Registrar Rutina
+                </button>
+            </div>
+        </h:form>
+        <!--        //modal regitro de rutinas-->
+        <div class="modal" tabindex="-1" role="dialog" id="RegistroDeRutinas">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h1>Registro de Rutinas SparmamGym</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h:form >
+                            <div class="input-group mb-3">
+                                <label for="inputTd" class="visually-hidden">Tipo</label>
+                                <h:selectOneMenu value="#{entrenadorView.tipo_Rutina}" class="form-select" id="inputTd" >
+                                    <f:selectItem itemValue="Definicion" itemLabel="Definicion"></f:selectItem>
+                                    <f:selectItem itemValue="Volumen" itemLabel="Volumen"></f:selectItem>
+                                </h:selectOneMenu>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <label for="inputTdAreaTabajar" class="visually-hidden">Nombre</label>
+                                <h:selectOneMenu value="#{entrenadorView.nombre}" class="form-select" id="inputTdAreaTabajar" >
+                                    <f:selectItem itemValue="Gluteo" itemLabel="Gluteo"></f:selectItem>
+                                    <f:selectItem itemValue="Pierna" itemLabel="Pierna"></f:selectItem>
+                                    <f:selectItem itemValue="Pecho" itemLabel="Pecho"></f:selectItem>
+                                    <f:selectItem itemValue="Espalda" itemLabel="Espalda"></f:selectItem>
+                                    <f:selectItem itemValue="Hombro" itemLabel="Hombro"></f:selectItem>
+                                    <f:selectItem itemValue="Brazo" itemLabel="Brazo"></f:selectItem>
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group mb-3">
+                                    <h:inputText required="true" requiredMessage="En campo Descripcion de duracion es requerido" class="form-control" html5:placeholder="Descripcion complementaria sobre la rutina" value="#{entrenadorView.descripcion}"/>
+                                </div>
+                            </div>
+                            
+                       
+                                  <div class="input-group mb-3">
+                                      <h:inputText  html5:type="time"  required="true" requiredMessage="En campo Hora final es requerido" class="form-control" html5:placeholder="Hora final" value="#{entrenadorView.duracion}"/>
+                            </div>
+                            
+                            <div class="input-group mb-3">
+                                <h:inputText  html5:type="date"  required="true" requiredMessage="En campo Fecha es requerido" class="form-control" html5:placeholder="Fecha" />
+                            </div>
+
+
+                         
+                            <h:panelGroup id="panelSub">   
+                                <label for="inputEntrenador" class="visually-hidden">Entrenador</label>
+                                <h:selectOneMenu  class="form-control" value="#{entrenadorView.entrenador_Id_entrenador}" >
+                                    <f:selectItems itemLabel="#{entrenador.usuariosIdusuarios.nombres}  #{entrenador.usuariosIdusuarios.apellidos}" itemValue="#{entrenador.identrenador}" var="entrenador" value="#{entrenadorView.listaEntrenador}"  ></f:selectItems>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+
+                            <div class="input-group mb-3">
+                                <h:commandButton value="registrar" action="#{entrenadorView.crearRutina()}" class="btn btn-danger">
+
+                                </h:commandButton>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <h:form style="margin: 10px">
+            <table class="table table-danger table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Tipo de rutina</th>
+                        <th scope="col">Nombre de la rutina</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Duracion</th>
+                        <th scope="col">Agenda</th>
+                        <th scope="col">Hora</th>
+
+                    </tr>
+                </thead>
+
+                <c:forEach items="#{entrenadorView.listRutina}" var="rutina">
+                    <tbody>
+                        <tr>
+                            <th>#{rutina.tipoRutina}</th>
+                            <th>#{rutina.nombre}</th>
+                            <th>#{rutina.descripcion}</th>
+                            <th>#{rutina.duracion}</th>
+                            <td>#{rutina.agendaIdagenda.fecha}</td>
+                            <td>#{rutina.hora}</td>
+                        </tr>
+                    </tbody>
+                </c:forEach>
+            </table>
+        </h:form>
+
+    </ui:composition>
+</html>
