@@ -1,0 +1,248 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema spartamgym_reserva
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema spartamgym_reserva
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `spartamgym_reserva` DEFAULT CHARACTER SET utf8mb4 ;
+USE `spartamgym_reserva` ;
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_usuario` (
+  `Id_Usuario` INT(11) NOT NULL AUTO_INCREMENT,
+  `Tipo_doc` VARCHAR(45) NOT NULL,
+  `Numero_doc` VARCHAR(20) NOT NULL,
+  `Nombres` VARCHAR(45) NOT NULL,
+  `Apellidos` VARCHAR(45) NOT NULL,
+  `Direccion` VARCHAR(45) NOT NULL,
+  `Numero_celular` VARCHAR(10) NOT NULL,
+  `Correo` VARCHAR(45) NOT NULL,
+  `Clave` VARCHAR(45) NOT NULL,
+  `Estado` TINYINT(4) NULL DEFAULT 1,
+  PRIMARY KEY (`Id_Usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_administrador`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_administrador` (
+  `Id_administrador` INT(11) NOT NULL AUTO_INCREMENT,
+  `t_usuario_Id_Usuario` INT(11) NOT NULL,
+  PRIMARY KEY (`Id_administrador`),
+  INDEX `fk_t_administrador_t_usuario1_idx` (`t_usuario_Id_Usuario` ASC) ,
+  CONSTRAINT `fk_t_administrador_t_usuario1`
+    FOREIGN KEY (`t_usuario_Id_Usuario`)
+    REFERENCES `spartamgym_reserva`.`t_usuario` (`Id_Usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_entrenador`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_entrenador` (
+  `Id_entrenador` INT(11) NOT NULL AUTO_INCREMENT,
+  `t_usuario_Id_Usuario` INT(11) NOT NULL,
+  PRIMARY KEY (`Id_entrenador`),
+  INDEX `fk_t_entrenador_t_usuario1_idx` (`t_usuario_Id_Usuario` ASC) ,
+  CONSTRAINT `fk_t_entrenador_t_usuario1`
+    FOREIGN KEY (`t_usuario_Id_Usuario`)
+    REFERENCES `spartamgym_reserva`.`t_usuario` (`Id_Usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_evento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_evento` (
+  `Id_evento` INT(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  `Lugar` VARCHAR(45) NOT NULL,
+  `Fecha` DATE NOT NULL,
+  `Hora_inicio` TIME NOT NULL,
+  `Hora_fin` TIME NOT NULL,
+  `t_entrenador_Id_entrenador` INT(11) NOT NULL,
+  `t_administrador_Id_administrador` INT(11) NOT NULL,
+  PRIMARY KEY (`Id_evento`),
+  INDEX `fk_t_evento_t_entrenador1_idx` (`t_entrenador_Id_entrenador` ASC) ,
+  INDEX `fk_t_evento_t_administrador1_idx` (`t_administrador_Id_administrador` ASC) ,
+  CONSTRAINT `fk_t_evento_t_administrador1`
+    FOREIGN KEY (`t_administrador_Id_administrador`)
+    REFERENCES `spartamgym_reserva`.`t_administrador` (`Id_administrador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_evento_t_entrenador1`
+    FOREIGN KEY (`t_entrenador_Id_entrenador`)
+    REFERENCES `spartamgym_reserva`.`t_entrenador` (`Id_entrenador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_agenda_evento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_agenda_evento` (
+  `Id_agenda_evento` INT(11) NOT NULL AUTO_INCREMENT,
+  `Id_evento` INT(11) NOT NULL,
+  `Id_administrador` INT(11) NOT NULL,
+  `Id_entrenador` INT(11) NOT NULL,
+  PRIMARY KEY (`Id_agenda_evento`),
+  INDEX `fk_agenda_evento_evento_idx` (`Id_evento` ASC) ,
+  INDEX `fk_agenda_evento_administrador_idx` (`Id_administrador` ASC) ,
+  INDEX `fk_agenda_evento_entrenador_idx` (`Id_entrenador` ASC) ,
+  CONSTRAINT `fk_agenda_evento_administrador`
+    FOREIGN KEY (`Id_administrador`)
+    REFERENCES `spartamgym_reserva`.`t_administrador` (`Id_administrador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agenda_evento_entrenador`
+    FOREIGN KEY (`Id_entrenador`)
+    REFERENCES `spartamgym_reserva`.`t_entrenador` (`Id_entrenador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agenda_evento_evento`
+    FOREIGN KEY (`Id_evento`)
+    REFERENCES `spartamgym_reserva`.`t_evento` (`Id_evento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_rutina`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_rutina` (
+  `Id_rutina` INT(11) NOT NULL AUTO_INCREMENT,
+  `Tipo` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  `Fecha` DATE NOT NULL,
+  `Hora_inicio` TIME NOT NULL,
+  `Hora_fin` TIME NOT NULL,
+  `t_entrenador_Id_entrenador` INT(11) NOT NULL,
+  `t_entrenador_Id_entrenador1` INT(11) NOT NULL,
+  PRIMARY KEY (`Id_rutina`),
+  INDEX `fk_t_rutina_t_entrenador1_idx` (`t_entrenador_Id_entrenador` ASC) ,
+  INDEX `fk_t_rutina_t_entrenador2_idx` (`t_entrenador_Id_entrenador1` ASC) ,
+  CONSTRAINT `fk_t_rutina_t_entrenador1`
+    FOREIGN KEY (`t_entrenador_Id_entrenador`)
+    REFERENCES `spartamgym_reserva`.`t_entrenador` (`Id_entrenador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_rutina_t_entrenador2`
+    FOREIGN KEY (`t_entrenador_Id_entrenador1`)
+    REFERENCES `spartamgym_reserva`.`t_entrenador` (`Id_entrenador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_agenda_rutina`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_agenda_rutina` (
+  `Id_agenda_rutina` INT(11) NOT NULL AUTO_INCREMENT,
+  `Id_rutina` INT(11) NOT NULL,
+  `Id_entrenador` INT(11) NOT NULL,
+  `Id_administrador` INT(11) NOT NULL,
+  PRIMARY KEY (`Id_agenda_rutina`),
+  INDEX `fk_rutina_rutina_idx` (`Id_rutina` ASC) ,
+  INDEX `fk_agenda_rutina_entrenador_idx` (`Id_entrenador` ASC) ,
+  INDEX `fl_agendaRutina_administrador_idx` (`Id_administrador` ASC) ,
+  CONSTRAINT `fk_agenda_rutina_entrenador`
+    FOREIGN KEY (`Id_entrenador`)
+    REFERENCES `spartamgym_reserva`.`t_entrenador` (`Id_entrenador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agenda_rutina_rutina`
+    FOREIGN KEY (`Id_rutina`)
+    REFERENCES `spartamgym_reserva`.`t_rutina` (`Id_rutina`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fl_agendaRutina_administrador`
+    FOREIGN KEY (`Id_administrador`)
+    REFERENCES `spartamgym_reserva`.`t_administrador` (`Id_administrador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_cliente` (
+  `Id_cliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `t_usuario_Id_Usuario` INT(11) NOT NULL,
+  PRIMARY KEY (`Id_cliente`),
+  INDEX `fk_t_cliente_t_usuario1_idx` (`t_usuario_Id_Usuario` ASC) ,
+  CONSTRAINT `fk_t_cliente_t_usuario1`
+    FOREIGN KEY (`t_usuario_Id_Usuario`)
+    REFERENCES `spartamgym_reserva`.`t_usuario` (`Id_Usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_rol`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_rol` (
+  `Id_rol` INT(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id_rol`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `spartamgym_reserva`.`t_usuario_has_t_rol`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `spartamgym_reserva`.`t_usuario_has_t_rol` (
+  `t_usuario_Id_Usuario` INT(11) NOT NULL,
+  `t_rol_Id_rol` INT(11) NOT NULL,
+  PRIMARY KEY (`t_usuario_Id_Usuario`, `t_rol_Id_rol`),
+  INDEX `fk_t_usuario_has_t_rol_t_rol1_idx` (`t_rol_Id_rol` ASC) ,
+  INDEX `fk_t_usuario_has_t_rol_t_usuario1_idx` (`t_usuario_Id_Usuario` ASC) ,
+  CONSTRAINT `fk_t_usuario_has_t_rol_t_rol1`
+    FOREIGN KEY (`t_rol_Id_rol`)
+    REFERENCES `spartamgym_reserva`.`t_rol` (`Id_rol`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_usuario_has_t_rol_t_usuario1`
+    FOREIGN KEY (`t_usuario_Id_Usuario`)
+    REFERENCES `spartamgym_reserva`.`t_usuario` (`Id_Usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

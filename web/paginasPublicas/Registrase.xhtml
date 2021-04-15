@@ -35,7 +35,7 @@
                     <h:form >
                         <div class="input-group mb-3">
                             <label for="inputTd" class="visually-hidden">Tipo de documento</label>
-                            <h:selectOneMenu value="#{usuariosSesion.usuReg.tipodocumento}" class="form-select" id="inputTd" >
+                            <h:selectOneMenu value="#{usuariosSesion.regUsu.tipodoc}" class="form-select" id="inputTd" >
                                 <f:selectItem itemValue="---" itemLabel="---"></f:selectItem>
                                 <f:selectItem itemValue="T.Identidad" itemLabel="T.Identidad"></f:selectItem>
                                 <f:selectItem itemValue="Cedula" itemLabel="Cedula"></f:selectItem>
@@ -44,7 +44,7 @@
 
                         </div>
                         <div class="input-group mb-3">
-                            <h:inputText required="true" requiredMessage="Numero de documento" class="form-control" html5:placeholder="Numero de documento" value="#{usuariosSesion.usuReg.numerodocumento}">
+                            <h:inputText required="true" requiredMessage="Numero de documento" class="form-control" html5:placeholder="Numero de documento" value="#{usuariosSesion.regUsu.numerodoc}">
 
                             </h:inputText>
                             <div class="input-group-append">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <h:inputText required="true" requiredMessage="Campo de  Nombres es requerido" class="form-control" html5:placeholder="Nombres" value="#{usuariosSesion.usuReg.nombres}"/>
+                            <h:inputText required="true" requiredMessage="Campo de  Nombres es requerido" class="form-control" html5:placeholder="Nombres" value="#{usuariosSesion.regUsu.nombres}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <h:inputText required="true" requiredMessage="Campo de  Apellidos es requerido" class="form-control" html5:placeholder="Apellidos" value="#{usuariosSesion.usuReg.apellidos}"/>
+                            <h:inputText required="true" requiredMessage="Campo de  Apellidos es requerido" class="form-control" html5:placeholder="Apellidos" value="#{usuariosSesion.regUsu.apellidos}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -70,7 +70,15 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <h:inputText required="true"   requiredMessage="Campo de  Numero de telefonico es requerido" class="form-control" html5:placeholder="Numero de telefonico" value="#{usuariosSesion.usuReg.numerocelular}"/>
+                            <h:inputText required="true" requiredMessage="Campo de  Direccion es requerido" class="form-control" html5:placeholder="Direccion" value="#{usuariosSesion.regUsu.direccion}" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <h:inputText required="true"   requiredMessage="Campo de  Numero de telefonico es requerido" class="form-control" html5:placeholder="Numero de telefonico" value="#{usuariosSesion.regUsu.numerocelular}"/>
 
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -79,7 +87,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <h:inputText required="true" requiredMessage="Campo de  Direccion es requerido" class="form-control" html5:placeholder="Direccion" value="#{usuariosSesion.usuReg.direccion}" />
+                            <h:inputText required="true" requiredMessage="Campo de  Correo es requerido" class="form-control" html5:placeholder="Correo" value="#{usuariosSesion.regUsu.correo}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -87,15 +95,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <h:inputText required="true" requiredMessage="Campo de  Correo es requerido" class="form-control" html5:placeholder="Correo" value="#{usuariosSesion.usuReg.correo}"/>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <h:inputSecret  required="true" requiredMessage="Campo de  Clave es requerido" class="form-control" html5:placeholder="Clave" value="#{usuariosSesion.usuReg.clave}"/>
+                            <h:inputSecret  required="true" requiredMessage="Campo de  Clave es requerido" class="form-control" html5:placeholder="Clave" value="#{usuariosSesion.regUsu.clave}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
@@ -115,7 +115,7 @@
                             <!-- /.col -->
                             <div class="col-4">
                                 <h:commandButton value="Register" 
-                                                 action="#{usuariosSesion.registrar()}"
+                                                 action="#{usuariosSesion.registrarUsuario()}"
                                                  class="btn btn-primary btn-block"/>
                             </div>
                             <!-- /.col -->

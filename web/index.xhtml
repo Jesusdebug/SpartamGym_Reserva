@@ -33,7 +33,7 @@
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Inicio Sesion</p>
-<!--                    <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('2')}">
+                    <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('2')}">
                         <div class="alert alert-danger" role="alert">
                             Por favor revise sus datos !!!!!
                         </div>
@@ -50,7 +50,7 @@
                             Usuario no existe, por favor registrarse <br></br>
                             <strong>Se parte de parte de SpartamGym</strong>!!!!!
                         </div>
-                    </c:if>-->
+                    </c:if>
                     <h:form  >
                         <div class="input-group mb-3">
                             <h:inputText required="true" requiredMessage="Ingrese un correo" value="#{usuariosSesion.correoIn}" class="form-control" html5:placeholder="Email"/>
@@ -71,7 +71,7 @@
                         <div class="row">
 
                             <div class="col-4">
-                                <h:commandButton value="Sign In" class="btn btn-primary btn-block" action="#{usuariosSesion.ingresar()}"></h:commandButton>
+                                <h:commandButton value="Sign In" class="btn btn-primary btn-block" action="#{usuariosSesion.ingresarUsuario()}"></h:commandButton>
                             </div>
                             <!-- /.col -->
                         </div>
