@@ -5,8 +5,8 @@
  */
 package edu.reserva.facade;
 
-import edu.reserva.controlador.usuariosSesion;
 import edu.reserva.entity.TUsuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,8 +30,9 @@ public class TUsuarioFacade extends AbstractFacade<TUsuario> implements TUsuario
     public TUsuarioFacade() {
         super(TUsuario.class);
     }
+
     @Override
-    public TUsuario validar(String correoIn, String claveIn){
+    public TUsuario validar(String correoIn, String claveIn) {
         try {
             Query q = em.createQuery("SELECT Tu FROM TUsuario Tu WHERE Tu.correo =:correoIn AND Tu.clave=:claveIn");
             q.setParameter("correoIn", correoIn);
@@ -42,8 +43,9 @@ public class TUsuarioFacade extends AbstractFacade<TUsuario> implements TUsuario
             return null;
         }
     }
+
     @Override
-    public TUsuario buscarCorreo(String correo){
+    public TUsuario buscarCorreo(String correo) {
         try {
             em.getEntityManagerFactory().getCache().evictAll();
             Query q = em.createQuery("SELECT Tu FROM TUsuario Tu WHERE Tu.correo =:correo");
@@ -51,6 +53,36 @@ public class TUsuarioFacade extends AbstractFacade<TUsuario> implements TUsuario
             return (TUsuario) q.getSingleResult();
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public List<TUsuario> listaUsuarios() {
+        try {
+            em.getEntityManagerFactory().getCache().evictAll();
+            Query q = em.createQuery("SELECT Tu FROM TUsuario Tu");
+            return q.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean registrarUsuariosCarga(String Tipo_doc, String Numero_doc, String Nombres, String Apellidos, String Direccion, String Numero_celular, String Correo, String Clave) {
+        try {
+            Query q = em.createNativeQuery("INSERT INTO `t_usuario` (`Tipo_doc`, `Numero_doc`, `Nombres`, `Apellidos`, `Direccion`, `Numero_celular`, `Correo`, `Clave`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            q.setParameter(1, Tipo_doc);
+            q.setParameter(2, Numero_doc);
+            q.setParameter(3, Nombres);
+            q.setParameter(4, Apellidos);
+            q.setParameter(5, Direccion);
+            q.setParameter(6, Numero_celular);
+            q.setParameter(7, Correo);
+            q.setParameter(8, Clave);
+            q.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

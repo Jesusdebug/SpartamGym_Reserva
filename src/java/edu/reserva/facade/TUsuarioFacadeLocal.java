@@ -33,5 +33,9 @@ public interface TUsuarioFacadeLocal {
     public TUsuario validar(String correoIn, String claveIn);
 
     public TUsuario buscarCorreo(String correoIn);
+
+    public List<TUsuario> listaUsuarios();
+
+    public boolean registrarUsuariosCarga(String Tipo_doc, String Numero_doc, String Nombres, String Apellidos, String Direccion, String Numero_celular, String Correo, String Clave);
     
 }

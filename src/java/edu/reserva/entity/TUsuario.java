@@ -79,7 +79,7 @@ public class TUsuario implements Serializable {
     private String direccion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 15)
     @Column(name = "Numero_celular")
     private String numerocelular;
     @Basic(optional = false)

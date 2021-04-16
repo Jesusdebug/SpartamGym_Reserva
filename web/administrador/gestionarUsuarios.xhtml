@@ -3,16 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui"       >
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"       
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
 
         <div class="container" style="margin-top:30px; text-align: center">
             <h:form id="carga" enctype="multipart/form-data">
-                <h:commandLink  action="#{agendaView.descargarListausuarios()}"  target="_blanck" style="margin-bottom: 10px;" class="btn btn-outline-success" value="Reporte">
+                <h:commandLink   target="_blanck" style="margin-bottom: 10px;" class="btn btn-outline-success" value="Reporte">
 
                 </h:commandLink>
                 <p:fileUpload
@@ -44,14 +42,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="#{usuariosSesion.listaUsuarios}" var="usuario">
+                        <c:forEach items="#{usuariosSesion.listaUsuario}" var="usuario">
                             <tr>
-                                <th>#{usuario.tipodocumento}</th>
-                                <td>#{usuario.numerodocumento}</td>
+                                <th>#{usuario.tipodoc}</th>
+                                <td>#{usuario.numerodoc}</td>
                                 <td>#{usuario.nombres} #{usuario.apellidos}</td>
                                 <td>#{usuario.correo}</td>
                                 <td>
-                                    <h:commandButton action="#{usuariosSesion.eliminar(usuario.idusuarios)}" class="btn btn-outline-danger" value="X">
+                                    <h:commandButton  class="btn btn-outline-danger" action="#{usuariosSesion.eliminarUsuario(usuario.idUsuario)}" value="X">
 
                                     </h:commandButton>
                                 </td>
@@ -67,210 +65,7 @@
 
 
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegistrarUsuarios">
-                Registrar usuarios
-            </button>
-            <div class="modal" tabindex="-1" role="dialog" id="ModalRegistrarUsuarios">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Registrar Usuarios</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h:form >
-                                <div class="input-group mb-3">
-                                    <label for="inputTd" class="visually-hidden">Tipo de documento</label>
-                                    <h:selectOneMenu value="#{usuariosSesion.usuReg.tipodocumento}" class="form-select" id="inputTd" >
-                                        <f:selectItem itemValue="---" itemLabel="---"></f:selectItem>
-                                        <f:selectItem itemValue="T.Identidad" itemLabel="T.Identidad"></f:selectItem>
-                                        <f:selectItem itemValue="Cedula" itemLabel="Cedula"></f:selectItem>
-                                        <f:selectItem itemValue="Cc: Extranjera" itemLabel="Cc: Extranjera"></f:selectItem>
-                                    </h:selectOneMenu>
 
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Numero de documento" class="form-control" html5:placeholder="Numero de documento" value="#{usuariosSesion.usuReg.numerodocumento}"/>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Campo de  Nombres es requerido" class="form-control" html5:placeholder="Nombres" value="#{usuariosSesion.usuReg.nombres}"/>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Campo de  Apellidos es requerido" class="form-control" html5:placeholder="Apellidos" value="#{usuariosSesion.usuReg.apellidos}"/>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true"   requiredMessage="Campo de  Numero de telefonico es requerido" class="form-control" html5:placeholder="Numero de telefonico" value="#{usuariosSesion.usuReg.numerocelular}"/>
-
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Campo de  Direccion es requerido" class="form-control" html5:placeholder="Direccion" value="#{usuariosSesion.usuReg.direccion}" />
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Campo de  Correo es requerido" class="form-control" html5:placeholder="Correo" value="#{usuariosSesion.usuReg.correo}"/>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputSecret  required="true" requiredMessage="Campo de  Clave es requerido" class="form-control" html5:placeholder="Clave" value="#{usuariosSesion.usuReg.clave}"/>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-8">
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree"/>
-                                            <label for="agreeTerms">
-                                                I agree to the <a href="#">terms</a>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-4">
-                                        <h:commandButton value="Register" 
-                                                         action="#{usuariosSesion.registrar()}"
-                                                         class="btn btn-primary btn-block"/>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                            </h:form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal" tabindex="-1" role="dialog" id="ModalActualizarUsuarios">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Actualizar Datos</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h:form class="table-dark table-striped">
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Nombres" class="form-control" html5:placeholder="Nombres" value="#{usuario.apellidos}"/>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="apellidos" class="form-control" html5:placeholder="apellidos" value="#{usuario.apellidos}"/>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Telefono" class="form-control" html5:placeholder="Telefono" value="#{usuariosSesion.usuReg.numerocelular}"/>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Direccin" class="form-control" html5:placeholder="Direccin" value="#{usuariosSesion.usuReg.direccion}"/>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="Correo" class="form-control" html5:placeholder="Correo" value="#{usuariosSesion.usuReg.correo}"/>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="clave" class="form-control" html5:placeholder="clave" value="#{usuariosSesion.usuReg.clave}"/>
-                                </div>
-
-                                <h:commandButton action="#{usuariosSesion.actualizar()}" class="btn btn-outline-danger" value="actualizar"/>
-                            </h:form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPerfiles" aria-hidden="true">
-                <div class="modal-dialog" role="document" style="max-width: 675px;">
-                    <div class="modal-content">
-
-                        <h:panelGroup id="modalRoles">
-                            <h:form id="formularioRoles">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Perfiles - #{usuariosSesion.usuLog.nombres} #{usuariosSesion.usuLog.apellidos}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="jumbotron jumbotron-fluid">
-                                        <h:panelGroup id="container">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="card" style="width: 18rem;">
-                                                            <div class="card-header">
-                                                                Activos
-                                                            </div>
-                                                            <ul class="list-group list-group-flush">
-                                                                <c:forEach items="#{usuariosSesion.usuLog.rolCollection}" var="rol">
-                                                                    <h:commandLink action="#{usuariosSesion.eliminarRol(rolIn)}">
-                                                                        <li class="list-group-item">#{rol.nombre}</li>    
-                                                                        <f:ajax></f:ajax>
-                                                                    </h:commandLink>
-                                                                </c:forEach>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="card" style="width: 18rem;">
-                                                            <div class="card-header">
-                                                                Sin Activar
-                                                            </div>
-                                                            <ul class="list-group list-group-flush">
-                                                                <c:forEach items="#{usuariosSesion.listRoles}" var="rol">
-                                                                    <h:commandLink action="#{usuariosSesion.agregarRol(rol)}">
-                                                                        <li class="list-group-item">#{rol.nombre}</li> 
-                                                                        <!--                                                                                                                                                    <f:ajax render="formularioRoles:container"></f:ajax>-->
-                                                                    </h:commandLink>
-                                                                </c:forEach>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </h:panelGroup>
-                                    </div>
-                                </div>                            
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                </div>
-                            </h:form>
-                        </h:panelGroup>
-
-                    </div>
-                </div>
-            </div>
         </div>
 
     </ui:composition>
