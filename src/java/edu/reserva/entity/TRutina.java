@@ -86,9 +86,6 @@ public class TRutina implements Serializable {
     @JoinColumn(name = "t_entrenador_Id_entrenador", referencedColumnName = "Id_entrenador")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TEntrenador tentrenadorIdentrenador;
-    @JoinColumn(name = "t_entrenador_Id_entrenador1", referencedColumnName = "Id_entrenador")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TEntrenador tentrenadorIdentrenador1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrutina", fetch = FetchType.LAZY)
     private Collection<TAgendaRutina> tAgendaRutinaCollection;
 
@@ -171,14 +168,6 @@ public class TRutina implements Serializable {
 
     public void setTentrenadorIdentrenador(TEntrenador tentrenadorIdentrenador) {
         this.tentrenadorIdentrenador = tentrenadorIdentrenador;
-    }
-
-    public TEntrenador getTentrenadorIdentrenador1() {
-        return tentrenadorIdentrenador1;
-    }
-
-    public void setTentrenadorIdentrenador1(TEntrenador tentrenadorIdentrenador1) {
-        this.tentrenadorIdentrenador1 = tentrenadorIdentrenador1;
     }
 
     @XmlTransient

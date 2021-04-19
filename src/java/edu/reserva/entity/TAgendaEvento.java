@@ -38,12 +38,6 @@ public class TAgendaEvento implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id_agenda_evento")
     private Integer idagendaevento;
-    @JoinColumn(name = "Id_administrador", referencedColumnName = "Id_administrador")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TAdministrador idadministrador;
-    @JoinColumn(name = "Id_entrenador", referencedColumnName = "Id_entrenador")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TEntrenador identrenador;
     @JoinColumn(name = "Id_evento", referencedColumnName = "Id_evento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TEvento idevento;
@@ -61,22 +55,6 @@ public class TAgendaEvento implements Serializable {
 
     public void setIdagendaevento(Integer idagendaevento) {
         this.idagendaevento = idagendaevento;
-    }
-
-    public TAdministrador getIdadministrador() {
-        return idadministrador;
-    }
-
-    public void setIdadministrador(TAdministrador idadministrador) {
-        this.idadministrador = idadministrador;
-    }
-
-    public TEntrenador getIdentrenador() {
-        return identrenador;
-    }
-
-    public void setIdentrenador(TEntrenador identrenador) {
-        this.identrenador = identrenador;
     }
 
     public TEvento getIdevento() {

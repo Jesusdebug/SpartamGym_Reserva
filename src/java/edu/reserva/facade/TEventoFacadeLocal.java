@@ -29,5 +29,7 @@ public interface TEventoFacadeLocal {
     List<TEvento> findRange(int[] range);
 
     int count();
+
+    public boolean registroEventos(String Nombre, String Descripcion, String Lugar, String Fecha, String Hora_inicio, String Hora_fin, int t_entrenador_Id_entrenador, int t_administrador_Id_administrador);
     
 }

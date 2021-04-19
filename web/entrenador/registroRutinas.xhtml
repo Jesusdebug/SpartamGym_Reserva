@@ -30,7 +30,7 @@
                         <h:form >
                             <div class="input-group mb-3">
                                 <label for="inputTd" class="visually-hidden">Tipo</label>
-                                <h:selectOneMenu value="#{entrenadorView.tipo_Rutina}" class="form-select" id="inputTd" >
+                                <h:selectOneMenu value="#{rutinaView.tipo}" class="form-select" id="inputTd" >
                                     <f:selectItem itemValue="Definicion" itemLabel="Definicion"></f:selectItem>
                                     <f:selectItem itemValue="Volumen" itemLabel="Volumen"></f:selectItem>
                                 </h:selectOneMenu>
@@ -38,7 +38,7 @@
 
                             <div class="input-group mb-3">
                                 <label for="inputTdAreaTabajar" class="visually-hidden">Nombre</label>
-                                <h:selectOneMenu value="#{entrenadorView.nombre}" class="form-select" id="inputTdAreaTabajar" >
+                                <h:selectOneMenu value="#{rutinaView.nombre}" class="form-select" id="inputTdAreaTabajar" >
                                     <f:selectItem itemValue="Gluteo" itemLabel="Gluteo"></f:selectItem>
                                     <f:selectItem itemValue="Pierna" itemLabel="Pierna"></f:selectItem>
                                     <f:selectItem itemValue="Pecho" itemLabel="Pecho"></f:selectItem>
@@ -49,30 +49,31 @@
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group mb-3">
-                                    <h:inputText required="true" requiredMessage="En campo Descripcion de duracion es requerido" class="form-control" html5:placeholder="Descripcion complementaria sobre la rutina" value="#{entrenadorView.descripcion}"/>
+                                    <h:inputText required="true" requiredMessage="En campo Descripcion de duracion es requerido" class="form-control" html5:placeholder="Descripcion complementaria sobre la rutina" value="#{rutinaView.descripcion}"/>
                                 </div>
                             </div>
-                            
-                       
-                                  <div class="input-group mb-3">
-                                      <h:inputText  html5:type="time"  required="true" requiredMessage="En campo Hora final es requerido" class="form-control" html5:placeholder="Hora final" value="#{entrenadorView.duracion}"/>
-                            </div>
-                            
+
+
                             <div class="input-group mb-3">
-                                <h:inputText  html5:type="date"  required="true" requiredMessage="En campo Fecha es requerido" class="form-control" html5:placeholder="Fecha" />
+                                <h:inputText  html5:type="date"  required="true" requiredMessage="En campo fecha es requerido" class="form-control" html5:placeholder="Fecha" value="#{rutinaView.fecha}"/>
                             </div>
 
+                            <div class="input-group mb-3">
+                                <h:inputText  html5:type="time"  required="true" requiredMessage="En campo Hora de inicio es requerido" class="form-control" html5:placeholder="Hora Inicio" value="#{rutinaView.hora_inicio}"/>
+                            </div>
 
-                         
+                            <div class="input-group mb-3">
+                                <h:inputText  html5:type="time"  required="true" requiredMessage="En campo Hora de inicio es requerido" class="form-control" html5:placeholder="Hora Inicio" value="#{rutinaView.hora_fin}"/>
+                            </div>
                             <h:panelGroup id="panelSub">   
                                 <label for="inputEntrenador" class="visually-hidden">Entrenador</label>
-                                <h:selectOneMenu  class="form-control" value="#{entrenadorView.entrenador_Id_entrenador}" >
-                                    <f:selectItems itemLabel="#{entrenador.usuariosIdusuarios.nombres}  #{entrenador.usuariosIdusuarios.apellidos}" itemValue="#{entrenador.identrenador}" var="entrenador" value="#{entrenadorView.listaEntrenador}"  ></f:selectItems>
+                                <h:selectOneMenu  class="form-control" value="#{rutinaView.entrenadorId}" >
+                                    <f:selectItems itemLabel="#{entrenador.tusuarioIdUsuario.nombres}  #{entrenador.tusuarioIdUsuario.apellidos}" itemValue="#{entrenador.identrenador}" var="entrenador" value="#{rutinaView.listaEntrenador}"  ></f:selectItems>
                                 </h:selectOneMenu>
                             </h:panelGroup>
 
                             <div class="input-group mb-3">
-                                <h:commandButton value="registrar" action="#{entrenadorView.crearRutina()}" class="btn btn-danger">
+                                <h:commandButton value="registrar" action="#{rutinaView.registroRutina()}" class="btn btn-danger">
 
                                 </h:commandButton>
                             </div>

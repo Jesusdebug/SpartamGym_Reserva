@@ -35,11 +35,16 @@
                     <p class="login-box-msg">Inicio Sesion</p>
                     <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('2')}">
                         <div class="alert alert-danger" role="alert">
-                            Por favor revise sus datos !!!!!
+                            Usuario no encontrador, Por favor revise sus datos !!!!!
+                        </div>
+                    </c:if>
+                    <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('3')}">
+                        <div class="alert alert-danger" role="alert">
+                            Usuario bloqueado, Por favor comuniquese con el administrador !!!!!
                         </div>
                     </c:if>
 
-                    <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('3')}">
+                    <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('4')}">
                         <div class="alert alert-danger" role="alert">
                             Usuario no encontrado, Por favor revise sus datos !!!!!
                         </div>

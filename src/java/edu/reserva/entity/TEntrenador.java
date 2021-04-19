@@ -46,13 +46,9 @@ public class TEntrenador implements Serializable {
     private Collection<TEvento> tEventoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tentrenadorIdentrenador", fetch = FetchType.LAZY)
     private Collection<TRutina> tRutinaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tentrenadorIdentrenador1", fetch = FetchType.LAZY)
-    private Collection<TRutina> tRutinaCollection1;
     @JoinColumn(name = "t_usuario_Id_Usuario", referencedColumnName = "Id_Usuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TUsuario tusuarioIdUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "identrenador", fetch = FetchType.LAZY)
-    private Collection<TAgendaEvento> tAgendaEventoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "identrenador", fetch = FetchType.LAZY)
     private Collection<TAgendaRutina> tAgendaRutinaCollection;
 
@@ -89,30 +85,12 @@ public class TEntrenador implements Serializable {
         this.tRutinaCollection = tRutinaCollection;
     }
 
-    @XmlTransient
-    public Collection<TRutina> getTRutinaCollection1() {
-        return tRutinaCollection1;
-    }
-
-    public void setTRutinaCollection1(Collection<TRutina> tRutinaCollection1) {
-        this.tRutinaCollection1 = tRutinaCollection1;
-    }
-
     public TUsuario getTusuarioIdUsuario() {
         return tusuarioIdUsuario;
     }
 
     public void setTusuarioIdUsuario(TUsuario tusuarioIdUsuario) {
         this.tusuarioIdUsuario = tusuarioIdUsuario;
-    }
-
-    @XmlTransient
-    public Collection<TAgendaEvento> getTAgendaEventoCollection() {
-        return tAgendaEventoCollection;
-    }
-
-    public void setTAgendaEventoCollection(Collection<TAgendaEvento> tAgendaEventoCollection) {
-        this.tAgendaEventoCollection = tAgendaEventoCollection;
     }
 
     @XmlTransient

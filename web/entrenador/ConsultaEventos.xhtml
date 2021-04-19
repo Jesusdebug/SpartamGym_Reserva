@@ -8,28 +8,21 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
-        <c:forEach  items="#{eventosView.listaEventos}" var="evento">
+          <c:forEach  items="#{eventosView.listaEventos}" var="evento">
             <div class="card" style="width: 18rem; margin: 20px; float: left">
-                <img src="..." class="card-img-top" alt="..."/>
                 <div class="card-body">
-                    <h5 class="card-title">Eventos Spartanos de #{evento.nombre}</h5>
-                    <p class="card-text">#{evento.descripcion}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">#{evento.tiempoduracion}</li>
-                    <li class="list-group-item">#{evento.lugar}</li>
-                    <li class="list-group-item">Cantidad de asistentes insccrito hasta el momento #</li>
-                </ul>
-                <div class="card-body">
+                    <img src="..." class="card-img-top" alt="..."/>
+                    <div class="card-body">
+                        <h5 class="card-title">Eventos Spartanos de #{evento.nombre}</h5>
+                        <p class="card-text">#{evento.descripcion}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">#{evento.horainicio}</li>
+                        <li class="list-group-item">#{evento.horafin}</li>
+                        <li class="list-group-item">#{evento.lugar}</li>
+                        <li class="list-group-item">Cantidad de asistentes insccritos hasta el momento #</li>
+                    </ul>
 
-                    <h:form>
-                        <h:commandButton  html5:data-toggle="modal" html5:data-target="#exampleModal" class="btn btn-danger" value="Colaborar">
-                            
-                        </h:commandButton>
-                        <h:commandButton  html5:data-toggle="modal" html5:data-target="#cargaImagenes" class="btn btn-danger" value="imganes">
-                          
-                        </h:commandButton>
-                    </h:form>
                 </div>
             </div>  
             <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
@@ -43,16 +36,13 @@
                         </div>
                         <div class="modal-body">
 
-                            <form>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Identidad</label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput"/>
-                                </div>
-                            </form>
+                            <label for="inputevento" class="visually-hidden">Evento</label>
+                            <h:selectOneMenu  class="form-control" value="#{agendaView.eventoId}" >
+                                <f:selectItems itemLabel="#{evento.nombre} #{evento.descripcion}" itemValue="#{evento.idevento}" var="evento" value="#{eventosView.listaEventos}"  ></f:selectItems>
+                            </h:selectOneMenu>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Confirmar</button>
-                        </div>
+                        <h:commandButton  html5:data-toggle="modal" html5:data-target="#exampleModal" class="btn btn-danger" value="#{agendaView.agendar()}"></h:commandButton>
+
                     </div>
                 </div>
             </div>

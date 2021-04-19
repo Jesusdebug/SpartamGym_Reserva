@@ -8,17 +8,17 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
-        <c:forEach  items="#{entrenadorView.listRutina}" var="rutina">
+        <c:forEach  items="#{rutinaView.listaRutina}" var="rutina">
             <div class="card" style="width: 18rem; margin: 20px; float: left">
                 <img src="..." class="card-img-top" alt="..."/>
                 <div class="card-body">
                     <h5 class="card-title"> #{rutina.nombre}</h5>
                     <p class="card-text">#{rutina.descripcion}</p>
-                    <p class="card-text">#{rutina.duracion}</p>
-                    <p class="card-text">#{rutina.hora}</p>
+                    <p class="card-text">#{rutina.horainicio}</p>
+                    <p class="card-text">#{rutina.horafin}</p>
                     <h:form>
-                        <h:commandButton  html5:data-toggle="modal" html5:data-target="#exampleModal" class="btn btn-danger" value="Agendar">
-                            <f:ajax></f:ajax>
+                        <h:commandButton  html5:data-toggle="modal" html5:data-target="#exampleModal" class="btn btn-danger" value="Agendar" action="#{agendaRutinaView.cargaModal(rutina)}">
+                            <f:ajax render="AcualizaAgendaRutina"></f:ajax>
                         </h:commandButton>
                     </h:form>
                 </div>
@@ -29,22 +29,48 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Unirse Al evento</h5>
+                        <h5 class="modal-title">Confirma La Rutina</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <h:panelGroup id="AcualizaAgendaRutina"></h:panelGroup>
 
-                        <form>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Identidad</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <h:commandButton value="Agendar" class="btn btn-danger"/>
+                        <div class="modal-header">
+                            <h5 class="modal-title">Agenda Rutina #{agendaRutinaView.gestionRegAgendaRutina.idrutina.nombre} </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div> <div class="modal-header">
+                            <h5 class="modal-title">Descripcion #{agendaRutinaView.gestionRegAgendaRutina.idrutina.descripcion} </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <label for="inputevento" class="visually-hidden">Coonfirmar</label>
+                            <h:selectOneMenu  class="form-control" value="#{agendaRutinaView.rutinaId}" >
+                                <f:selectItems itemLabel="#{rutina.nombre}" itemValue="#{rutina.idrutina}" var="rutina" value="#{agendaRutinaView.listaRutina}"  ></f:selectItems>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu  class="form-control" value="#{agendaRutinaView.entrenadorId}" >
+                                <f:selectItems itemLabel="#{entrenador.tusuarioIdUsuario.nombres} #{entrenador.tusuarioIdUsuario.apellidos}" itemValue="#{entrenador.identrenador}" var="entrenador" value="#{agendaRutinaView.listaEntrenador}"  ></f:selectItems>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu  class="form-control" value="#{agendaRutinaView.administradorId}" >
+                                <f:selectItems itemLabel="#{administrador.tusuarioIdUsuario.nombres} #{administrador.tusuarioIdUsuario.apellidos}" itemValue="#{administrador.idadministrador}" var="administrador" value="#{agendaRutinaView.listaAdministrador}"  ></f:selectItems>
+                            </h:selectOneMenu>
+
+                        </div>
+
+                        <div class="modal-footer">  
+                            <h:form>
+                                <h:commandButton  value="Agendar" action="#{agendaRutinaView.registrarAgendaRutina()}">
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

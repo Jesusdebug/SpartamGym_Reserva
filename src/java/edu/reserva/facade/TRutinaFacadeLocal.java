@@ -29,5 +29,7 @@ public interface TRutinaFacadeLocal {
     List<TRutina> findRange(int[] range);
 
     int count();
-    
+
+    public boolean ResgistrarRutina(String Tipo, String Nombre, String Descripcion, String Fecha, String Hora_inicio, String Hora_fin, int t_entrenador_Id_entrenador);
+
 }

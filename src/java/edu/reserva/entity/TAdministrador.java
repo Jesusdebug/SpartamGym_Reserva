@@ -44,8 +44,6 @@ public class TAdministrador implements Serializable {
     private Integer idadministrador;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tadministradorIdadministrador", fetch = FetchType.LAZY)
     private Collection<TEvento> tEventoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador", fetch = FetchType.LAZY)
-    private Collection<TAgendaEvento> tAgendaEventoCollection;
     @JoinColumn(name = "t_usuario_Id_Usuario", referencedColumnName = "Id_Usuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TUsuario tusuarioIdUsuario;
@@ -74,15 +72,6 @@ public class TAdministrador implements Serializable {
 
     public void setTEventoCollection(Collection<TEvento> tEventoCollection) {
         this.tEventoCollection = tEventoCollection;
-    }
-
-    @XmlTransient
-    public Collection<TAgendaEvento> getTAgendaEventoCollection() {
-        return tAgendaEventoCollection;
-    }
-
-    public void setTAgendaEventoCollection(Collection<TAgendaEvento> tAgendaEventoCollection) {
-        this.tAgendaEventoCollection = tAgendaEventoCollection;
     }
 
     public TUsuario getTusuarioIdUsuario() {

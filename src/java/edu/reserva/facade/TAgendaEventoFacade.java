@@ -9,6 +9,7 @@ import edu.reserva.entity.TAgendaEvento;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +29,15 @@ public class TAgendaEventoFacade extends AbstractFacade<TAgendaEvento> implement
     public TAgendaEventoFacade() {
         super(TAgendaEvento.class);
     }
-    
+    @Override
+   public boolean resitrarAgenda(int Id_evento){
+        try {
+            Query q = em.createNativeQuery("INSERT INTO`t_agenda_evento` (`Id_evento`) VALUES ( ?)");
+            q.setParameter(1,Id_evento);
+            return true;
+                    
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

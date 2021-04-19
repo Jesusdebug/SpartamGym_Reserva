@@ -10,74 +10,65 @@
     <ui:composition>
         <c:forEach  items="#{eventosView.listaEventos}" var="evento">
             <div class="card" style="width: 18rem; margin: 20px; float: left">
-                <img src="..." class="card-img-top" alt="..."/>
                 <div class="card-body">
-                    <h5 class="card-title">Eventos Spartanos de #{evento.nombre}</h5>
-                    <p class="card-text">#{evento.descripcion}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">#{evento.horadeInicio}</li>
-                    <li class="list-group-item">#{evento.horaFinal}</li>
-                    <li class="list-group-item">#{evento.lugar}</li>
-                    <li class="list-group-item">Cantidad de asistentes insccritos hasta el momento #</li>
-                </ul>
-                <div class="card-body">
+                    <img src="..." class="card-img-top" alt="..."/>
+                    <div class="card-body">
+                        <h5 class="card-title">Eventos Spartanos de #{evento.nombre}</h5>
+                        <p class="card-text">#{evento.descripcion}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">#{evento.horainicio}</li>
+                        <li class="list-group-item">#{evento.horafin}</li>
+                        <li class="list-group-item">#{evento.lugar}</li>
+                        <li class="list-group-item">Cantidad de asistentes insccritos hasta el momento #</li>
+                    </ul>
 
-                    <h:form>
-                        <h:commandButton  html5:data-toggle="modal" html5:data-target="#exampleModal" class="btn btn-danger" value="Asistir">
-                            <f:ajax></f:ajax>
-                        </h:commandButton>
-                    </h:form>
                 </div>
+                <h:form>
+                    <h:commandButton action="#{agendaView.cargaEventos(evento)}" html5:data-toggle="modal" html5:data-target="#exampleModal" class="btn btn-danger" value="Agendar">
+                        <f:ajax render="modalEventos"></f:ajax>
+                    </h:commandButton>
+                </h:form>
             </div>  
-            <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+        </c:forEach>
+
+        <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+
+                    <h:panelGroup id="modalEventos">
+
                         <div class="modal-header">
-                            <h5 class="modal-title">Unirse Al evento</h5>
+                            <h5 class="modal-title">Unirse Al evento #{agendaView.gestionEvento.nombre} </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                         <div class="modal-body">
-
-                            <form>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Identidad</label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput"/>
-                                </div>
-                            </form>
+                            <label for="inputevento" class="visually-hidden">Descricion  #{agendaView.gestionEvento.descripcion}</label>
+                            <h:selectOneMenu  class="form-control" value="#{agendaView.gestionEvento.idevento}" >
+                                <f:selectItems itemLabel="#{evento.idevento}" itemValue="#{evento.idevento}" var="evento" value="#{agendaView.listaEventos}"  ></f:selectItems>
+                            </h:selectOneMenu>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Confirmar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-        <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Unirse Al evento</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
 
-                        <form>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Identidad</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <h:commandButton value="Asistir" class="btn btn-danger"/>
-                    </div>
+                    </h:panelGroup>
+                    
+                    <h:form>
+                        <h:selectOneMenu  class="form-control" value="#{agendaView.eventoId}" >
+                            <f:selectItems itemLabel="#{evento.idevento}" itemValue="#{evento.idevento}" var="evento" value="#{agendaView.listaEventos}"  ></f:selectItems>
+                    </h:selectOneMenu>
+                   
+                        <h:commandButton class="btn btn-danger" action="#{agendaView.agendar()}" value="Agendar"></h:commandButton>
+                    </h:form>
+
+
+
                 </div>
+
             </div>
         </div>
- </ui:composition>
+
+    </ui:composition>
 </html>

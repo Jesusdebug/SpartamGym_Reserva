@@ -69,18 +69,22 @@ public class usuariosSesion implements Serializable {
     public void ingresarUsuario() {
         try {
             logUsuario = tUsuarioFacadeLocal.validar(correoIn, claveIn);
-            if (logUsuario.getIdUsuario() != null) {
-                FacesContext fc = FacesContext.getCurrentInstance();
-                fc.getExternalContext().redirect("administrador/index.xhtml");
-
-            } else {
-
+            if (logUsuario == null) {
                 bandera = "2";
-            }
+            }else {
+                if (logUsuario.getEstado()==1) {
+                    FacesContext fc = FacesContext.getCurrentInstance();
+                    fc.getExternalContext().redirect("cliente/index.xhtml");
+                }else{
+                    bandera = "3";
+                }
+              }
+           
         } catch (IOException e) {
-            bandera = "4";
+            bandera = "Intente nuevamente";
         }
     }
+
 
     public void recuperarClave() {
         try {

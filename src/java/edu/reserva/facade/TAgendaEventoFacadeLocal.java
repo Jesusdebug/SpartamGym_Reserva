@@ -29,5 +29,7 @@ public interface TAgendaEventoFacadeLocal {
     List<TAgendaEvento> findRange(int[] range);
 
     int count();
+
+    public boolean resitrarAgenda(int Id_evento);
     
 }
