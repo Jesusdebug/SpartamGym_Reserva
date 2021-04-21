@@ -29,5 +29,7 @@ public interface TRolFacadeLocal {
     List<TRol> findRange(int[] range);
 
     int count();
+
+    public boolean ingresarRol(int t_usuario_Id_usuarios, int t_rol_Id_rol);
     
 }

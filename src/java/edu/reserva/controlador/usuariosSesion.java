@@ -5,7 +5,9 @@
  */
 package edu.reserva.controlador;
 
+import edu.reserva.entity.TRol;
 import edu.reserva.entity.TUsuario;
+import edu.reserva.facade.TRolFacadeLocal;
 import edu.reserva.facade.TUsuarioFacadeLocal;
 import edu.reserva.utilities.Email;
 import java.io.IOException;
@@ -17,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
-
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -36,6 +37,8 @@ public class usuariosSesion implements Serializable {
 
     @EJB
     TUsuarioFacadeLocal tUsuarioFacadeLocal;
+    @EJB
+    TRolFacadeLocal tRolFacadeLocal;
 
     /**
      * Creates a new instance of usuariosSesion
@@ -44,6 +47,8 @@ public class usuariosSesion implements Serializable {
     private TUsuario regUsu = new TUsuario();
     private TUsuario logUsuario = new TUsuario();
     private List<TUsuario> listaUsuario = new ArrayList<>();
+    private List<TRol> listaRol = new ArrayList<>();
+    private int idRol;
     //atributos de la clase y atrubtos para operar en la vista
     private String bandera = "";
     private String correoIn = "";
@@ -56,13 +61,19 @@ public class usuariosSesion implements Serializable {
 
     @PostConstruct
     public void cargaInicial() {
-        listaUsuario.addAll(tUsuarioFacadeLocal.findAll());
         listaUsuario.addAll(tUsuarioFacadeLocal.listaUsuarios());
+        listaRol.addAll(tRolFacadeLocal.findAll());
     }
 
     public void registrarUsuario() {
         regUsu.setEstado(Short.valueOf("1"));
         tUsuarioFacadeLocal.create(regUsu);
+        tRolFacadeLocal.ingresarRol(regUsu.getIdUsuario(), 1);
+        regUsu = new TUsuario();
+    }
+
+    public void crearRol() {
+        tRolFacadeLocal.ingresarRol(idUsuario, idRol);
         regUsu = new TUsuario();
     }
 
@@ -71,20 +82,17 @@ public class usuariosSesion implements Serializable {
             logUsuario = tUsuarioFacadeLocal.validar(correoIn, claveIn);
             if (logUsuario == null) {
                 bandera = "2";
-            }else {
-                if (logUsuario.getEstado()==1) {
+            } else {
+                if (logUsuario.getEstado() == 1) {
                     FacesContext fc = FacesContext.getCurrentInstance();
                     fc.getExternalContext().redirect("cliente/index.xhtml");
-                }else{
-                    bandera = "3";
                 }
-              }
-           
+                bandera = "3";
+            }
         } catch (IOException e) {
             bandera = "Intente nuevamente";
         }
     }
-
 
     public void recuperarClave() {
         try {
@@ -114,8 +122,8 @@ public class usuariosSesion implements Serializable {
         InputStream input = event.getFile().getInputStream();
         List cellData = new ArrayList();
         try {
-            XSSFWorkbook workobook = new XSSFWorkbook(input);
-            XSSFSheet hssfSheet = workobook.getSheetAt(0);
+            XSSFWorkbook workbook = new XSSFWorkbook(input);
+            XSSFSheet hssfSheet = workbook.getSheetAt(0);
             Iterator rowIterador = hssfSheet.rowIterator();
             rowIterador.next();
             while (rowIterador.hasNext()) {
@@ -171,8 +179,8 @@ public class usuariosSesion implements Serializable {
                 }
 
             }
-        } catch (Exception e) {
-//            System.out.println("edu.spartamgym.controlador.usuariosSesion.cargaUsuarios()" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("edu.spartamgym.controlador.usuariosSesion.cargaUsuarios()" + e.getMessage());
         }
     }
 
@@ -231,6 +239,22 @@ public class usuariosSesion implements Serializable {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public List<TRol> getListaRol() {
+        return listaRol;
+    }
+
+    public void setListaRol(List<TRol> listaRol) {
+        this.listaRol = listaRol;
+    }
+
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
 
 }

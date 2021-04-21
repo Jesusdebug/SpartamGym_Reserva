@@ -21,21 +21,18 @@
                             <th scope="col">Entrenador</th>
                         </tr>
                     </thead>
-                    <c:forEach items="#{agendaView.listaAgendaEvento}" var="evento">
+                    <c:forEach items="#{agendaView.listaEventos}" var="evento">
                         <tbody class="table table-danger table-striped">
 
                             <tr>
-                                <th scope="row">#{evento.idevento.nombre}</th>
-                                <td>#{evento.idevento.horainicio}</td>
-                                <td>#{evento.idevento.horafin}</td>
-                                <td>#{evento.idevento.lugar}</td>
-                                <td>#{evento.idevento.tentrenadorIdentrenador.tusuarioIdUsuario.nombres}</td>
-                                <td>#{evento.idevento.tadministradorIdadministrador.tusuarioIdUsuario.nombres}</td>
+                                <th scope="row">#{evento.nombre}</th>
+                                <td>#{evento.horainicio}</td>
+                                <td>#{evento.horafin}</td>
+                                <td>#{evento.lugar}</td>
+                                <td>#{evento.tentrenadorIdentrenador.tusuarioIdUsuario.nombres}</td>
+                                <td>#{evento.tadministradorIdadministrador.tusuarioIdUsuario.nombres}</td>
                                 <td>
-                                    <h:form>
-                                        <h:commandButton  value="Cancelar" action="#{agendaView.eliminar(evento.idagendaevento)}">
-                                        </h:commandButton>
-                                    </h:form>
+                                 
                                 </td>
 
 
