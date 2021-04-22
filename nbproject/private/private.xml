@@ -4,8 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/src/java/edu/reserva/controlador/usuariosSesion.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/src/java/edu/reserva/facade/TUsuarioFacade.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/web/administrador/gestionarUsuarios.xhtml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/web/cliente/ConsultaEventos.xhtml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/web/administrador/Agendas.xhtml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/web/entrenador/ConsultaEventos.xhtml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/src/java/edu/reserva/controlador/agendaView.java</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reservas/web/entrenador/Eventos.xhtml</file>
         </group>
     </open-files>
 </project-private>

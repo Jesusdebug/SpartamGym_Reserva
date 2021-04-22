@@ -91,21 +91,16 @@
                         <th scope="col">Nombre de la rutina</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Duracion</th>
-                        <th scope="col">Agenda</th>
-                        <th scope="col">Hora</th>
-
                     </tr>
                 </thead>
 
-                <c:forEach items="#{entrenadorView.listRutina}" var="rutina">
+                <c:forEach items="#{agendaRutinaView.listaRutina}" var="rutina">
                     <tbody>
                         <tr>
-                            <th>#{rutina.tipoRutina}</th>
+                            <th>#{rutina.tipo}</th>
                             <th>#{rutina.nombre}</th>
                             <th>#{rutina.descripcion}</th>
-                            <th>#{rutina.duracion}</th>
-                            <td>#{rutina.agendaIdagenda.fecha}</td>
-                            <td>#{rutina.hora}</td>
+                            <th>#{rutina.horainicio}   #{rutina.horafin}</th>
                         </tr>
                     </tbody>
                 </c:forEach>

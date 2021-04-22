@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
         <div class="container-fluid" style="margin-top:50px; text-align: center">
@@ -66,6 +67,31 @@
                 </div>
             </div>  
         </div>
+        <h:form style="margin: 10px">
+            <table class="table table-danger table-striped">
+                <thead>
+                    <tr class="badge-dark">
+                        <th scope="col">Evento</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Fecha </th>
+                        <th scope="col">Hora </th>
+                    </tr>
+                </thead>
+
+                <c:forEach items="#{agendaView.listaEventos}" var="evento">
+                    <tbody>
+                        <tr>
+                            <th>#{evento.nombre}</th>
+                            <th>#{evento.descripcion}</th>
+                            <th>#{evento.lugar}</th>
+                            <th>#{evento.fecha}</th>
+                            <th>#{evento.horainicio} #{evento.horafin}</th>
+                        </tr>
+                    </tbody>
+                </c:forEach>
+            </table>
+        </h:form>
 
     </ui:composition>
 </html>

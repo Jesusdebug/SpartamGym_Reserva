@@ -17,8 +17,8 @@
                             <th scope="col">Hora Inicio</th>
                             <th scope="col">Hora Final</th>
                             <th scope="col">Lugar</th>
-                            <th scope="col">Administrador</th>
-                            <th scope="col">Entrenador</th>
+                            <th scope="col">Catidad de asistentes</th>
+                          
                         </tr>
                     </thead>
                     <c:forEach items="#{agendaView.listaEventos}" var="evento">
@@ -29,11 +29,7 @@
                                 <td>#{evento.horainicio}</td>
                                 <td>#{evento.horafin}</td>
                                 <td>#{evento.lugar}</td>
-                                <td>#{evento.tentrenadorIdentrenador.tusuarioIdUsuario.nombres}</td>
-                                <td>#{evento.tadministradorIdadministrador.tusuarioIdUsuario.nombres}</td>
-                                <td>
-                                 
-                                </td>
+                                <td>                                </td>
 
 
                             </tr>
