@@ -9,9 +9,10 @@
 
     <ui:composition>
 
-        <div class="card" style="width: 18rem; margin: 20px; float: left">
-            <img src="..." class="card-img-top" alt="..."/>
-            <c:forEach items="#{agendaRutinaView.listaRutina}" var="rutina">
+
+        <img src="..." class="card-img-top" alt="..."/>
+        <c:forEach items="#{agendaRutinaView.listaRutina}" var="rutina">
+            <div class="card" style="width: 18rem; margin: 20px; float: left">
                 <div class="card-body">
                     <h5 class="card-title"> #{rutinaView.nombre}</h5>
                     <div class="card-body">
@@ -29,8 +30,9 @@
                         </h:commandButton>
                     </h:form>
                 </div>
-            </c:forEach>>
-        </div>  
+            </div> 
+        </c:forEach>>
+
 
 
         <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
@@ -79,6 +81,7 @@
                 </div>
             </div>
         </div>
+
 
     </ui:composition>
 </html>
