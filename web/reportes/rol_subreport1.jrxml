@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rol_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="db813b53-5c76-482f-b232-3e7de66944b1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select t_entrenador_Id_entrenador, count(*) as cantidad from t_rutina group by t_entrenador_Id_entrenador;]]>
+	</queryString>
+	<field name="t_entrenador_Id_entrenador" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Long"/>
+	<group name="t_entrenador_Id_entrenador">
+		<groupExpression><![CDATA[$F{t_entrenador_Id_entrenador}]]></groupExpression>
+	</group>
+	<group name="cantidad">
+		<groupExpression><![CDATA[$F{cantidad}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<summary>
+		<band height="174" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="89" y="0" width="263" height="148" uuid="2580a4e4-881a-43b5-9b75-e2d2c746f056"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{t_entrenador_Id_entrenador}]]></keyExpression>
+					<valueExpression><![CDATA[$F{cantidad}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

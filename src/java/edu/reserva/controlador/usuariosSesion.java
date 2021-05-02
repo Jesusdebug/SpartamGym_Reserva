@@ -85,7 +85,7 @@ public class usuariosSesion implements Serializable {
             } else {
                 if (logUsuario.getEstado() == 1) {
                     FacesContext fc = FacesContext.getCurrentInstance();
-                    fc.getExternalContext().redirect("cliente/index.xhtml");
+                    fc.getExternalContext().redirect("administrador/index.xhtml");
                 }
                 bandera = "3";
             }

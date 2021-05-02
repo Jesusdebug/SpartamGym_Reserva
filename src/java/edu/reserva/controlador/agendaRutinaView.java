@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-
+import net.sf.jasperreports.engine.JRException;
 /**
  *
  * @author Antonio
@@ -86,7 +86,8 @@ public class agendaRutinaView implements Serializable {
         regAgendaRutina = new TAgendaRutina();
 
     }
-       public void descargaRporteRutinas_entrenador() {
+      
+       public void descargaRporteRutinas() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext context = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
@@ -95,19 +96,18 @@ public class agendaRutinaView implements Serializable {
 
         try {
             Map parametro = new HashMap();
-            //Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/SpartamGym_Reservas", "root", "");
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/spartamgym_reserva", "root", "");
-            File jasper = new File(context.getRealPath("/reportes/Agendas_rutina_eventos.jasper"));
+            File jasper = new File(context.getRealPath("/Reportes/Usuariosjasper"));
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
-            hsr.addHeader("Content-disposition", "attachment; filename=Reporte de Ruinas por Entrenador.pdf");
+            hsr.addHeader("Content-disposition", "attachment; filename=Rutinas.pdf");
             OutputStream os = hsr.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jp, os);
             os.flush();
             os.close();
             facesContext.responseComplete();
         } catch (Exception e) {
-            System.out.println("edu.cidesem.controlador.GestionView.descargaListadoEstudiantes()"+e.getMessage());
+            System.out.println("edu.reserva.controlador.agendaRutinaView.descargaRporteRutinas()"+e.getMessage());
         }
     }
 
