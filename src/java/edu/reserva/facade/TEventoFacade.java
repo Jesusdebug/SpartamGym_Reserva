@@ -6,6 +6,7 @@
 package edu.reserva.facade;
 
 import edu.reserva.entity.TEvento;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,7 +32,7 @@ public class TEventoFacade extends AbstractFacade<TEvento> implements TEventoFac
     }
 
     @Override
-    public boolean registroEventos(String Nombre, String Descripcion, String Lugar, String Fecha, String Hora_inicio, String Hora_fin, int t_entrenador_Id_entrenador, int t_administrador_Id_administrador) {
+    public boolean registroEventos(String Nombre, String Descripcion, String Lugar, Date Fecha, String Hora_inicio, String Hora_fin, int t_entrenador_Id_entrenador, int t_administrador_Id_administrador) {
         try {
             Query q = em.createNativeQuery("INSERT INTO `t_evento` (`Nombre`, `Descripcion`, `Lugar`, `Fecha`, `Hora_inicio`, `Hora_fin`, `t_entrenador_Id_entrenador`, `t_administrador_Id_administrador`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             q.setParameter(1, Nombre);

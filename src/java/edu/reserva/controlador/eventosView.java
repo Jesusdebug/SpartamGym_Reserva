@@ -7,9 +7,11 @@ package edu.reserva.controlador;
 
 import com.mysql.jdbc.Connection;
 import edu.reserva.entity.TAdministrador;
+import edu.reserva.entity.TAgendaEvento;
 import edu.reserva.entity.TEntrenador;
 import edu.reserva.entity.TEvento;
 import edu.reserva.facade.TAdministradorFacadeLocal;
+import edu.reserva.facade.TAgendaEventoFacadeLocal;
 import edu.reserva.facade.TEntrenadorFacadeLocal;
 import edu.reserva.facade.TEventoFacadeLocal;
 import java.sql.DriverManager;
@@ -19,6 +21,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,8 @@ public class eventosView implements Serializable {
     TEntrenadorFacadeLocal tEntrenadorFacadeLocal;
     @EJB
     TAdministradorFacadeLocal tAdministradorFacadeLocal;
+    @EJB
+    TAgendaEventoFacadeLocal tAgendaEventoFacadeLocal;
 
     /**
      * Creates a new instance of eventosView
@@ -55,11 +60,14 @@ public class eventosView implements Serializable {
     private TEvento regEvento = new TEvento();
     private List<TEntrenador> listaEntrenador = new ArrayList<>();
     private List<TAdministrador> listaAdministrador = new ArrayList<>();
-private List<TEvento> listaEventos = new ArrayList<>();
+    private List<TAgendaEvento> ListaAgendaEvento = new ArrayList<>();
+    private List<TEvento> listaEventos = new ArrayList<>();
+    private TAgendaEvento gestionTAgendaEvento = new TAgendaEvento();
+    private int IdAgendaEvento;
     private String nombre;
     private String descripcion;
     private String lugar;
-    private String fecha;
+    private Date fecha;
     private String horaInicio;
     private String horaFin;
     private int fk_entrenador;
@@ -86,7 +94,6 @@ private List<TEvento> listaEventos = new ArrayList<>();
         regEvento = new TEvento();
     }
 
-    
     public void descargaListadoUsuaroios_Roles() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext context = facesContext.getExternalContext();
@@ -108,13 +115,21 @@ private List<TEvento> listaEventos = new ArrayList<>();
             os.close();
             facesContext.responseComplete();
         } catch (Exception e) {
-            System.out.println("edu.cidesem.controlador.GestionView.descargaListadoEstudiantes()"+e.getMessage());
+            System.out.println("edu.cidesem.controlador.GestionView.descargaListadoEstudiantes()" + e.getMessage());
         }
     }
-    
-    
-    
-    
+
+    public void cancelar(int idevento) {
+        try {
+            gestionTAgendaEvento = tAgendaEventoFacadeLocal.find(idevento);
+            tAgendaEventoFacadeLocal.remove(gestionTAgendaEvento);
+
+        } catch (Exception e) {
+            System.out.println("edu.reserva.controlador.eventosView.cancelar()"+ e.getMessage());
+        }
+
+    }
+
     public List<TEntrenador> getListaEntrenador() {
         return listaEntrenador;
     }
@@ -145,14 +160,6 @@ private List<TEvento> listaEventos = new ArrayList<>();
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
     }
 
     public String getHoraInicio() {
@@ -225,6 +232,38 @@ private List<TEvento> listaEventos = new ArrayList<>();
 
     public void setListaEventos(List<TEvento> listaEventos) {
         this.listaEventos = listaEventos;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public List<TAgendaEvento> getListaAgendaEvento() {
+        return ListaAgendaEvento;
+    }
+
+    public void setListaAgendaEvento(List<TAgendaEvento> ListaAgendaEvento) {
+        this.ListaAgendaEvento = ListaAgendaEvento;
+    }
+
+    public int getIdAgendaEvento() {
+        return IdAgendaEvento;
+    }
+
+    public void setIdAgendaEvento(int IdAgendaEvento) {
+        this.IdAgendaEvento = IdAgendaEvento;
+    }
+
+    public TAgendaEvento getGestionTAgendaEvento() {
+        return gestionTAgendaEvento;
+    }
+
+    public void setGestionTAgendaEvento(TAgendaEvento gestionTAgendaEvento) {
+        this.gestionTAgendaEvento = gestionTAgendaEvento;
     }
 
 }

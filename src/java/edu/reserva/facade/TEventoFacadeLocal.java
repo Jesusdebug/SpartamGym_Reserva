@@ -6,6 +6,7 @@
 package edu.reserva.facade;
 
 import edu.reserva.entity.TEvento;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,6 +31,6 @@ public interface TEventoFacadeLocal {
 
     int count();
 
-    public boolean registroEventos(String Nombre, String Descripcion, String Lugar, String Fecha, String Hora_inicio, String Hora_fin, int t_entrenador_Id_entrenador, int t_administrador_Id_administrador);
+    public boolean registroEventos(String Nombre, String Descripcion, String Lugar, Date Fecha, String Hora_inicio, String Hora_fin, int t_entrenador_Id_entrenador, int t_administrador_Id_administrador);
     
 }

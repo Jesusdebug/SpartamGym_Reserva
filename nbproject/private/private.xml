@@ -3,24 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/facade/TUsuarioFacadeLocal.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/reportes/usuarios_roles_subreport1.jrxml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/controlador/rutinaView.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/administrador/body.xhtml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/reportes/Usuarios_subreport1.jrxml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/cliente/consutaRutinas.xhtml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/reportes/usuarios_roles.jrxml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/administrador/gestionarUsuarios.xhtml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/paginasPublicas/recuperarContraseña.xhtml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/controlador/agendaView.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/controlador/agendaRutinaView.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/reportes/Agendas_rutina_eventos.jrxml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/administrador/index.xhtml</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/cliente/ConsultaEventos.xhtml</file>
             <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/controlador/eventosView.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/controlador/usuariosSesion.java</file>
-            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/reportes/Usuarios.jrxml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/administrador/registrarEvento.xhtml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/administrador/body.xhtml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/controlador/agendaView.java</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/facade/TAgendaEventoFacadeLocal.java</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/web/administrador/REventos.xhtml</file>
+            <file>file:/C:/Users/Antonio/Documents/NetBeansProjects/SpartamGym_Reserva/src/java/edu/reserva/controlador/agendaRutinaView.java</file>
         </group>
     </open-files>
 </project-private>
