@@ -5,17 +5,38 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
-        <div class="jumbotron text-center" style="background-image:url('../imagen/Administrador.png');background-attachment: fixed;background-repeat: no-repeat;background-size: inherit;background-position-x: 150px;margin-bottom:0">
-             <img src="../imagen/Administrador.png"  style="height: 60px; width: 60px; margin-top: 10px; margin-right: 10px" class="figure-img img-fluid rounded" alt="#{rol.nombre}."></img>
-        
-            <h1>Administrador</h1>
+        <div class="jumbotron text-center" >
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="active" aria-current="true"  aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class="active" aria-current="true"  aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner" style="carousel-innermargin-top: -30px;">
+                    <div class="carousel-item active">
+                        <img src="../imagen/Cliente.png" width="24px" height="154px" class="d-block w-100" alt="..."/>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../imagen/Administrador.png" width="24px" height="154px" class="d-block w-100" alt="..."/>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../imagen/Vendedor.png" width="24px" height="154px" class="d-block w-100" alt="..."/>
+                    </div>
+                </div>
+                <div class="card" id="cardPhoto">
+                    <img src="../dist/img/perfiles/entrenador.png" class="card-img-top" alt="..."/>
+                    <div class="card-body">
+                        <h5 class="card-title">Administrador</h5>
+                        <p class="card-text">#{usuariosSesion.logUsuario.nombres} #{usuariosSesion.logUsuario.apellidos}</p>
+                    </div>
+                </div>
+            </div>
             <h1>Rereservas spartamGym</h1>
         </div>
-       <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a class="navbar-brand" href="index.xhtml">Recervas- SpartamGym</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon">dsaf</span>
-            </button>
             <div class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     Mi perfil

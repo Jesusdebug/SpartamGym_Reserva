@@ -29,19 +29,31 @@ public class TRolFacade extends AbstractFacade<TRol> implements TRolFacadeLocal 
     public TRolFacade() {
         super(TRol.class);
     }
-    
+
     //INSERT INTO `t_usuario_has_t_rol` (`t_usuario_Id_Usuario`, `t_rol_Id_rol`) VALUES (?, ?);
     @Override
-    public boolean ingresarRol(int t_usuario_Id_usuarios, int t_rol_Id_rol){
-    try {
-        Query q = em.createNativeQuery("INSERT INTO `t_usuario_has_t_rol` (`t_usuario_Id_Usuario`, `t_rol_Id_rol`) VALUES (?, ?)");
-        q.setParameter(1, t_usuario_Id_usuarios);
-        q.setParameter(2, t_rol_Id_rol);
-        q.executeUpdate();
-        return true;
-    } catch (Exception e) {
-        return false;
+    public boolean ingresarRol(int t_usuario_Id_usuarios, int t_rol_Id_rol) {
+        try {
+            Query q = em.createNativeQuery("INSERT INTO `t_usuario_has_t_rol` (`t_usuario_Id_Usuario`, `t_rol_Id_rol`) VALUES (?, ?)");
+            q.setParameter(1, t_usuario_Id_usuarios);
+            q.setParameter(2, t_rol_Id_rol);
+            q.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-    }
+       @Override
+        public TRol buscarRiol (int Id_rol){
+        try {
+                em.getEntityManagerFactory().getCache().evictAll();
+                Query q = em.createQuery("SELECT Ro FROM TRol Ro WHERE Ro.Id_rol = : idRol");
+                q.setParameter("Id_rol", Id_rol);
+                return (TRol) q.getSingleResult();
+            } catch (Exception e) {
+                return null;
+            }
+        }
     
+
 }

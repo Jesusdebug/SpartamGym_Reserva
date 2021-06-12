@@ -31,5 +31,7 @@ public interface TRolFacadeLocal {
     int count();
 
     public boolean ingresarRol(int t_usuario_Id_usuarios, int t_rol_Id_rol);
+
+    public TRol buscarRiol(int Id_rol);
     
 }

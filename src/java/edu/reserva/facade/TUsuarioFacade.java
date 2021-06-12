@@ -5,6 +5,7 @@
  */
 package edu.reserva.facade;
 
+import edu.reserva.entity.TRol;
 import edu.reserva.entity.TUsuario;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -84,5 +85,12 @@ public class TUsuarioFacade extends AbstractFacade<TUsuario> implements TUsuario
         } catch (Exception e) {
             return false;
         }
+
+     
+    }
+
+    @Override
+    public TRol buscarRiol(int idRol) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

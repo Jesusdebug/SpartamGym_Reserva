@@ -9,8 +9,6 @@
 
     <ui:composition>
         <div class="container-fluid" style="margin-top:50px; text-align: center">
-
-
             <div class="card" style="width: 40rem; margin: 20px; float: left">
                 <img src="..." class="card-img-top" alt="..."/>
                 <div class="card-body">
@@ -21,22 +19,7 @@
                         <div class="input-group mb-3">
                             <h:inputText required="true" requiredMessage="En campo Descripcion es requerido" class="form-control" html5:placeholder="Descripcion" value="#{eventosView.descripcion}"/>
                         </div>
-                        <!--                        <p:fileUpload
-                                                listener=""
-                                                mode="advanced"
-                                                dragDropSupport="true" 
-                                                sizeLimit="100000"
-                                                oncomplete="location.reload()"
-                                                onstart="Swal.showLoading()"
-                                                cancelLabel="Cancelar"
-                                                fileLimit="1"
-                                                fileLimitMessage="Cantidad de archivos no permitida"
-                                                uploadLabel="Subir"
-                                                label="Escoger"
-                                                allowTypes="/(\.|\/)jpe?g|png$/"
-                                                >
-                                            </p:fileUpload> -->
-                        <div class="input-group mb-3">
+                       <div class="input-group mb-3">
                             <h:inputText  html5:type="date"  required="true" requiredMessage="En campo Fecha es requerido" class="form-control" html5:placeholder="Fecha" value="#{eventosView.fecha}"/>
                         </div>
 
@@ -89,8 +72,8 @@
                             <th>#{evento.fecha}</th>
                             <th>#{evento.horainicio} #{evento.horafin}</th>
                             <th>
-                                    <h:commandButton value="Cancelar" action="#{eventosView.cancelar(evento.idevento)}" class="btn btn-danger"></h:commandButton>
-                         
+                                <h:commandButton value="Cancelar" action="#{eventosView.cancelar(evento.idevento)}" class="btn btn-danger"></h:commandButton>
+
                             </th>
                         </tr>
                     </tbody>

@@ -63,6 +63,7 @@ public class eventosView implements Serializable {
     private List<TAgendaEvento> ListaAgendaEvento = new ArrayList<>();
     private List<TEvento> listaEventos = new ArrayList<>();
     private TAgendaEvento gestionTAgendaEvento = new TAgendaEvento();
+    private TAgendaEvento AgendaEvento = new TAgendaEvento();
     private int IdAgendaEvento;
     private String nombre;
     private String descripcion;
@@ -83,6 +84,7 @@ public class eventosView implements Serializable {
         listaEntrenador.addAll(tEntrenadorFacadeLocal.findAll());
         listaAdministrador.addAll(tAdministradorFacadeLocal.findAll());
         listaEventos.addAll(tEventoFacadeLocal.findAll());
+        ListaAgendaEvento.addAll(tAgendaEventoFacadeLocal.findAll());
     }
 
     public void registrarEvento() {
@@ -105,27 +107,28 @@ public class eventosView implements Serializable {
             Map parametro = new HashMap();
             //Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/SpartamGym_Reservas", "root", "");
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/spartamgym_reserva", "root", "");
-            File jasper = new File(context.getRealPath("/reportes/Usuarios.jasper"));
+            File jasper = new File(context.getRealPath("/reportes/usuarios2.jasper"));
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
-            hsr.addHeader("Content-disposition", "attachment; filename=listadoEstudiantes.pdf");
+            hsr.addHeader("Content-disposition", "attachment; filename=Usuarios_Roles.pdf");
             OutputStream os = hsr.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jp, os);
             os.flush();
             os.close();
             facesContext.responseComplete();
         } catch (Exception e) {
-            System.out.println("edu.cidesem.controlador.GestionView.descargaListadoEstudiantes()" + e.getMessage());
+            System.out.println("edu.reserva.controlador.eventosView.descargaListadoUsuaroios_Roles()" + e.getMessage());
         }
     }
 
     public void cancelar(int idevento) {
         try {
-            gestionTAgendaEvento = tAgendaEventoFacadeLocal.find(idevento);
-            tAgendaEventoFacadeLocal.remove(gestionTAgendaEvento);
+            AgendaEvento = new TAgendaEvento();
+            AgendaEvento = tAgendaEventoFacadeLocal.find(idevento);
+            tAgendaEventoFacadeLocal.remove(AgendaEvento);
 
         } catch (Exception e) {
-            System.out.println("edu.reserva.controlador.eventosView.cancelar()"+ e.getMessage());
+            System.out.println("edu.reserva.controlador.eventosView.cancelar()" + e.getMessage());
         }
 
     }
@@ -264,6 +267,14 @@ public class eventosView implements Serializable {
 
     public void setGestionTAgendaEvento(TAgendaEvento gestionTAgendaEvento) {
         this.gestionTAgendaEvento = gestionTAgendaEvento;
+    }
+
+    public TAgendaEvento getAgendaEvento() {
+        return AgendaEvento;
+    }
+
+    public void setAgendaEvento(TAgendaEvento AgendaEvento) {
+        this.AgendaEvento = AgendaEvento;
     }
 
 }

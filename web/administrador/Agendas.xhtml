@@ -18,20 +18,16 @@
                             <th scope="col">Hora Final</th>
                             <th scope="col">Lugar</th>
                             <th scope="col">Catidad de asistentes</th>
-                          
                         </tr>
                     </thead>
                     <c:forEach items="#{agendaView.listaEventos}" var="evento">
                         <tbody class="table table-danger table-striped">
-
                             <tr>
                                 <th scope="row">#{evento.nombre}</th>
                                 <td>#{evento.horainicio}</td>
                                 <td>#{evento.horafin}</td>
                                 <td>#{evento.lugar}</td>
-                                <td>                                </td>
-
-
+                                <td> </td>
                             </tr>
                         </tbody>
                     </c:forEach>

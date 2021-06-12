@@ -21,6 +21,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import org.apache.bcel.generic.F2D;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -48,6 +49,7 @@ public class usuariosSesion implements Serializable {
     private TUsuario logUsuario = new TUsuario();
     private List<TUsuario> listaUsuario = new ArrayList<>();
     private List<TRol> listaRol = new ArrayList<>();
+    private TRol rol = new TRol();
     private int idRol;
     //atributos de la clase y atrubtos para operar en la vista
     private String bandera = "";
@@ -80,12 +82,24 @@ public class usuariosSesion implements Serializable {
     public void ingresarUsuario() {
         try {
             logUsuario = tUsuarioFacadeLocal.validar(correoIn, claveIn);
+
             if (logUsuario == null) {
                 bandera = "2";
             } else {
-                if (logUsuario.getEstado() == 1) {
+                if (logUsuario.getEstado() == 1 && logUsuario.getIdUsuario().equals(41)) {
                     FacesContext fc = FacesContext.getCurrentInstance();
                     fc.getExternalContext().redirect("administrador/index.xhtml");
+
+                } else {
+                    if (logUsuario.getEstado() == 1 && logUsuario.getIdUsuario().equals(134)) {
+                        FacesContext fc = FacesContext.getCurrentInstance();
+                        fc.getExternalContext().redirect("entrenador/index.xhtml");
+                    } else {
+                        if (logUsuario.getEstado() == 1 && rol.getIdrol() == 3) {
+                            FacesContext fc = FacesContext.getCurrentInstance();
+                            fc.getExternalContext().redirect("cliente/index.xhtml");
+                        }
+                    }
                 }
                 bandera = "3";
             }
@@ -113,8 +127,8 @@ public class usuariosSesion implements Serializable {
     public void eliminarUsuario(int Id_usuario) {
         logUsuario = tUsuarioFacadeLocal.find(Id_usuario);
         listaUsuario.remove(logUsuario);
-        tUsuarioFacadeLocal.remove(logUsuario);
-
+        logUsuario = new TUsuario();
+       
     }
 
     public void cargaUsuarios(FileUploadEvent event) throws IOException {
@@ -255,6 +269,14 @@ public class usuariosSesion implements Serializable {
 
     public void setIdRol(int idRol) {
         this.idRol = idRol;
+    }
+
+    public TRol getRol() {
+        return rol;
+    }
+
+    public void setRol(TRol rol) {
+        this.rol = rol;
     }
 
 }

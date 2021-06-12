@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01-jun-2021, 11:47:12
+    Author     : Antonio
+*/
+.carousel-inner {
+   margin-top: -55px; 
+   
+}
+.w-100 {
+    width: 80%!important;
+    height: 270px;
+    float: right;
+}
+.carousel {
+    position: relative;
+    height: 255px;
+    width: 80%;
+    margin-left: 20px;
+}
+
+#cardPhoto {
+    width: 180px;
+    height: 200px;
+    margin-top: -190px;
+}
+nav.navbar.navbar-expand-sm.bg-dark.navbar-dark {
+    margin-top: -40px;
+}

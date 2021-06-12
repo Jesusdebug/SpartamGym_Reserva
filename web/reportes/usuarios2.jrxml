@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="627b0b55-8954-425e-ab2f-e33ba5c5ae38">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Antonio\\Documents\\NetBeansProjects\\SpartamGym_Reserva\\web\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     t_usuario.`Numero_doc` AS t_usuario_Numero_doc,
+     t_usuario.`Nombres` AS t_usuario_Nombres,
+     t_usuario.`Apellidos` AS t_usuario_Apellidos,
+     t_usuario.`Direccion` AS t_usuario_Direccion,
+     t_usuario.`Numero_celular` AS t_usuario_Numero_celular,
+     t_usuario.`Correo` AS t_usuario_Correo,
+     t_rol.`Nombre` AS t_rol_Nombre,
+     t_usuario.`Tipo_doc` AS t_usuario_Tipo_doc
+FROM
+     `t_usuario` t_usuario INNER JOIN `t_usuario_has_t_rol` t_usuario_has_t_rol ON t_usuario.`Id_Usuario` = t_usuario_has_t_rol.`t_usuario_Id_Usuario`
+     INNER JOIN `t_rol` t_rol ON t_usuario_has_t_rol.`t_rol_Id_rol` = t_rol.`Id_rol`]]>
+	</queryString>
+	<field name="t_usuario_Numero_doc" class="java.lang.String"/>
+	<field name="t_usuario_Nombres" class="java.lang.String"/>
+	<field name="t_usuario_Apellidos" class="java.lang.String"/>
+	<field name="t_usuario_Direccion" class="java.lang.String"/>
+	<field name="t_usuario_Numero_celular" class="java.lang.String"/>
+	<field name="t_usuario_Correo" class="java.lang.String"/>
+	<field name="t_rol_Nombre" class="java.lang.String"/>
+	<field name="t_usuario_Tipo_doc" class="java.lang.String"/>
+	<group name="t_usuario_Numero_doc">
+		<groupExpression><![CDATA[$F{t_usuario_Numero_doc}]]></groupExpression>
+	</group>
+	<group name="t_usuario_Nombres">
+		<groupExpression><![CDATA[$F{t_usuario_Nombres}]]></groupExpression>
+	</group>
+	<group name="t_usuario_Apellidos">
+		<groupExpression><![CDATA[$F{t_usuario_Apellidos}]]></groupExpression>
+	</group>
+	<group name="t_usuario_Direccion">
+		<groupExpression><![CDATA[$F{t_usuario_Direccion}]]></groupExpression>
+	</group>
+	<background>
+		<band height="802" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<image>
+				<reportElement x="456" y="0" width="99" height="132" uuid="be907bf2-a6c8-4829-8b18-d8dcb0aa86d1"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="d9a15057-6af0-4144-99b4-9f4e8b4a3189"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="b05fcf0a-0410-4ba2-902d-85ebaefd48e6"/>
+					<textElement>
+						<font size="38" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reservas_SpartamGym]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="83348ef9-5bc1-4815-93d7-c922a62af8ee"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reserva tu entrenamiento]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#CC0000" uuid="5ff9b1f6-d8e2-40f0-a2c4-9a078774c4ad"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="dd1180e3-0278-4e4a-92fb-b1b5a0538cd4"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="47" y="6" width="38" height="20" uuid="6fbf05ee-f026-464c-b839-e910f1c534b3"/>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="6" width="47" height="20" uuid="a39b2201-8633-4548-82ee-699090194da1"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="6" width="51" height="20" uuid="2bbc535b-990f-4208-a696-e5b46db31c5a"/>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="6" width="53" height="20" uuid="2b9977aa-b4ab-4409-97b3-5f6c47258448"/>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="6" width="42" height="20" uuid="34852d4f-069b-4f43-ae08-019b9d4099cd"/>
+				<text><![CDATA[Celular]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="6" width="73" height="20" uuid="f6561be8-83e3-47ce-a2fe-186c9263088c"/>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="6" width="47" height="20" uuid="65eae617-06e6-4455-9cff-bf048e4085e9"/>
+				<text><![CDATA[Doc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="467" y="6" width="61" height="20" uuid="702c8618-de6a-4ab0-a6ba-709636d2c96d"/>
+				<text><![CDATA[Rol]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement x="47" y="19" width="38" height="20" uuid="f1fd0f0f-b660-4b85-8ac0-a6d712cc8753"/>
+				<textFieldExpression><![CDATA[$F{t_usuario_Numero_doc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="20" width="47" height="20" uuid="b6cfa2de-4793-4e72-a4fd-baafbe051ac6"/>
+				<textFieldExpression><![CDATA[$F{t_usuario_Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="20" width="51" height="20" uuid="94a32012-66f3-4119-a093-0e416ce9b205"/>
+				<textFieldExpression><![CDATA[$F{t_usuario_Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="19" width="53" height="20" uuid="a3c6770f-1a4e-4a10-a6b1-2354eb6c254e"/>
+				<textFieldExpression><![CDATA[$F{t_usuario_Direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="20" width="42" height="20" uuid="a1008d05-495f-4884-9f84-af30e3a3f2d1"/>
+				<textFieldExpression><![CDATA[$F{t_usuario_Numero_celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="20" width="73" height="20" uuid="f39672f7-fb73-4fb5-b7f5-9ce0f1e80367"/>
+				<textFieldExpression><![CDATA[$F{t_usuario_Correo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="19" width="39" height="20" uuid="bc58bdbb-4edb-4a50-9319-bad51934e8d5"/>
+				<textFieldExpression><![CDATA[$F{t_usuario_Tipo_doc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="467" y="19" width="61" height="20" uuid="974578e6-c793-4d8d-ac74-cc04f9683509"/>
+				<textFieldExpression><![CDATA[$F{t_rol_Nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="257" splitType="Stretch">
+			<subreport>
+				<reportElement x="47" y="15" width="420" height="229" uuid="f432f045-0b01-4c38-a4c7-138b908db4f5"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "usuarios2_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

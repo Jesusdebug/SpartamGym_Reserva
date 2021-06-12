@@ -29,5 +29,7 @@ public interface TAgendaRutinaFacadeLocal {
     List<TAgendaRutina> findRange(int[] range);
 
     int count();
+
+    public List<TAgendaRutina> listarRutina();
     
 }

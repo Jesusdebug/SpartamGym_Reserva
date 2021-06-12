@@ -6,9 +6,11 @@
 package edu.reserva.facade;
 
 import edu.reserva.entity.TAgendaRutina;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,15 @@ public class TAgendaRutinaFacade extends AbstractFacade<TAgendaRutina> implement
     public TAgendaRutinaFacade() {
         super(TAgendaRutina.class);
     }
-    
+    public List<TAgendaRutina> listarRutina(){
+        try {
+            em.getEntityManagerFactory().getCache().evictAll();
+            Query q = em.createQuery("SELECT agr FROM TAgendaRutina agr");
+            return q.getResultList();
+            
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
 }

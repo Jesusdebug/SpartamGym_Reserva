@@ -5,6 +5,7 @@
  */
 package edu.reserva.facade;
 
+import edu.reserva.entity.TRol;
 import edu.reserva.entity.TUsuario;
 import java.util.List;
 import javax.ejb.Local;
@@ -37,5 +38,7 @@ public interface TUsuarioFacadeLocal {
     public List<TUsuario> listaUsuarios();
 
     public boolean registrarUsuariosCarga(String Tipo_doc, String Numero_doc, String Nombres, String Apellidos, String Direccion, String Numero_celular, String Correo, String Clave);
+
+    public TRol buscarRiol(int idRol);
     
 }

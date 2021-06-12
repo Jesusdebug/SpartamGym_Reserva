@@ -68,10 +68,11 @@ public class agendaRutinaView implements Serializable {
 
     @PostConstruct
     public void cargarlistas() {
-        listaAgendaRutina.addAll(tAgendaRutinaFacadeLocal.findAll());
+       listaAgendaRutina.addAll(tAgendaRutinaFacadeLocal.findAll());
         listaRutina.addAll(tRutinaFacadeLocal.findAll());
         listaEntrenador.addAll(tEntrenadorFacadeLocal.findAll());
         listaAdministrador.addAll(tAdministradorFacadeLocal.findAll());
+      
     }
 
     public void registrarAgendaRutina() {
@@ -96,7 +97,7 @@ public class agendaRutinaView implements Serializable {
         try {
             Map parametro = new HashMap();
             Connection conec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/spartamgym_reserva", "root", "");
-            File jasper = new File(context.getRealPath("/Reportes/Usuariosjasper"));
+            File jasper = new File(context.getRealPath("/Reportes/reportAgendasRutina.jasper"));
             JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), parametro, conec);
             HttpServletResponse hsr = (HttpServletResponse) context.getResponse();
             hsr.addHeader("Content-disposition", "attachment; filename=Rutinas.pdf");
@@ -115,10 +116,25 @@ public class agendaRutinaView implements Serializable {
         gestionRegAgendaRutina = rutina;
     }
 
-    public void cancelar(int idagendarutina) {
-        gestionRegAgendaRutina = tAgendaRutinaFacadeLocal.find(idagendarutina);
-        tAgendaRutinaFacadeLocal.remove(gestionRegAgendaRutina);
+    public void eliminarAsig( int idagendaRutina) {
+        try {
+            gestionRegAgendaRutina = tAgendaRutinaFacadeLocal.find(idagendaRutina);
+            tAgendaRutinaFacadeLocal.remove(gestionRegAgendaRutina);
+            gestionRegAgendaRutina = new TAgendaRutina();
+        } catch (Exception e) {
+            System.out.println("edu.cidesem.controlador.GestionView.eliminarAsig()" + e.getMessage());
+        }
+
     }
+     public void cargarlista() {
+   try {
+                FacesContext fc = FacesContext.getCurrentInstance();
+                    fc.getExternalContext().redirect("RAgenda.xhtml");
+
+         } catch (Exception e) {
+             
+         }
+     }
 
     public List<TAdministrador> getListaAdministrador() {
         return listaAdministrador;
