@@ -57,13 +57,13 @@ public class eventosView implements Serializable {
     /**
      * Creates a new instance of eventosView
      */
+    private TEvento gesRegEvento = new TEvento();
     private TEvento regEvento = new TEvento();
     private List<TEntrenador> listaEntrenador = new ArrayList<>();
     private List<TAdministrador> listaAdministrador = new ArrayList<>();
     private List<TAgendaEvento> ListaAgendaEvento = new ArrayList<>();
     private List<TEvento> listaEventos = new ArrayList<>();
     private TAgendaEvento gestionTAgendaEvento = new TAgendaEvento();
-    private TAgendaEvento AgendaEvento = new TAgendaEvento();
     private int IdAgendaEvento;
     private String nombre;
     private String descripcion;
@@ -121,12 +121,11 @@ public class eventosView implements Serializable {
         }
     }
 
-    public void cancelar(int idevento) {
+    public void cancelar(int idAgendaEvento) {
         try {
-            AgendaEvento = new TAgendaEvento();
-            AgendaEvento = tAgendaEventoFacadeLocal.find(idevento);
-            tAgendaEventoFacadeLocal.remove(AgendaEvento);
-
+       gesRegEvento = tEventoFacadeLocal.find(idAgendaEvento);
+       tEventoFacadeLocal.remove(gesRegEvento);
+       gesRegEvento = new TEvento();
         } catch (Exception e) {
             System.out.println("edu.reserva.controlador.eventosView.cancelar()" + e.getMessage());
         }
@@ -269,12 +268,12 @@ public class eventosView implements Serializable {
         this.gestionTAgendaEvento = gestionTAgendaEvento;
     }
 
-    public TAgendaEvento getAgendaEvento() {
-        return AgendaEvento;
+    public TEvento getGesRegEvento() {
+        return gesRegEvento;
     }
 
-    public void setAgendaEvento(TAgendaEvento AgendaEvento) {
-        this.AgendaEvento = AgendaEvento;
+    public void setGesRegEvento(TEvento gesRegEvento) {
+        this.gesRegEvento = gesRegEvento;
     }
 
 }

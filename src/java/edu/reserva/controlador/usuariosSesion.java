@@ -5,8 +5,11 @@
  */
 package edu.reserva.controlador;
 
+import edu.reserva.entity.TAgendaEvento;
+import edu.reserva.entity.TEvento;
 import edu.reserva.entity.TRol;
 import edu.reserva.entity.TUsuario;
+import edu.reserva.facade.TAgendaEventoFacadeLocal;
 import edu.reserva.facade.TRolFacadeLocal;
 import edu.reserva.facade.TUsuarioFacadeLocal;
 import edu.reserva.utilities.Email;
@@ -21,12 +24,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-import org.apache.bcel.generic.F2D;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.event.FileUploadEvent;
+import edu.reserva.facade.TEventoFacadeLocal;
 
 /**
  *
@@ -34,8 +37,12 @@ import org.primefaces.event.FileUploadEvent;
  */
 @Named(value = "usuariosSesion")
 @SessionScoped
-public class usuariosSesion implements Serializable {
+public class usuariosSesion  implements Serializable{
 
+    @EJB
+    TAgendaEventoFacadeLocal tAgendaEventoFacadeLocal;
+    @EJB
+    TEventoFacadeLocal tEventoFacadeLocal;
     @EJB
     TUsuarioFacadeLocal tUsuarioFacadeLocal;
     @EJB
@@ -56,7 +63,9 @@ public class usuariosSesion implements Serializable {
     private String correoIn = "";
     private String claveIn = "";
     private int idUsuario = 0;
-
+    private int eventoId;
+    private TAgendaEvento regAgendaEvento = new TAgendaEvento();
+List<agendaView> agenda = new ArrayList<>();
     //metodo contructor
     public usuariosSesion() {
     }
@@ -95,7 +104,7 @@ public class usuariosSesion implements Serializable {
                         FacesContext fc = FacesContext.getCurrentInstance();
                         fc.getExternalContext().redirect("entrenador/index.xhtml");
                     } else {
-                        if (logUsuario.getEstado() == 1 && rol.getIdrol() == 3) {
+                        if (logUsuario.getEstado() == 1 ) {
                             FacesContext fc = FacesContext.getCurrentInstance();
                             fc.getExternalContext().redirect("cliente/index.xhtml");
                         }
@@ -119,7 +128,7 @@ public class usuariosSesion implements Serializable {
                 Email.sendClaves(logUsuario.getCorreo(), logUsuario.getNombres() + " " + logUsuario.getApellidos(), nuevaClave);
             }
         } catch (Exception e) {
-            bandera = "3";
+            System.out.println("edu.reserva.controlador.usuariosSesion.recuperarClave()" + e.getMessage());
         }
 
     }
@@ -128,7 +137,7 @@ public class usuariosSesion implements Serializable {
         logUsuario = tUsuarioFacadeLocal.find(Id_usuario);
         listaUsuario.remove(logUsuario);
         logUsuario = new TUsuario();
-       
+
     }
 
     public void cargaUsuarios(FileUploadEvent event) throws IOException {
@@ -196,6 +205,29 @@ public class usuariosSesion implements Serializable {
         } catch (IOException e) {
             System.out.println("edu.spartamgym.controlador.usuariosSesion.cargaUsuarios()" + e.getMessage());
         }
+    }
+
+//notificaciones
+    public void agendar() {
+        
+         try {
+             TEvento nuevoEvento = tEventoFacadeLocal.find(eventoId);
+        regAgendaEvento.setIdevento(nuevoEvento);
+        tAgendaEventoFacadeLocal.create(regAgendaEvento);
+        regAgendaEvento = new TAgendaEvento();
+       
+            logUsuario = tUsuarioFacadeLocal.buscarCorreo(correoIn);
+            if (logUsuario == null) {
+                bandera = "2";
+            } else {
+                String mensaje = "Te has agendado un evento revisa la pagina web";
+                tUsuarioFacadeLocal.edit(logUsuario);
+            Email.sendNotificacion(logUsuario.getCorreo(), logUsuario.getNombres()+" "+logUsuario.getApellidos(), mensaje);
+            }
+        } catch (Exception e) {
+            System.out.println("edu.reserva.controlador.usuariosSesion.recuperarClave()" + e.getMessage());
+        }
+
     }
 
     //metthods getters end setters
@@ -277,6 +309,22 @@ public class usuariosSesion implements Serializable {
 
     public void setRol(TRol rol) {
         this.rol = rol;
+    }
+
+    public int getEventoId() {
+        return eventoId;
+    }
+
+    public void setEventoId(int eventoId) {
+        this.eventoId = eventoId;
+    }
+
+    public TAgendaEvento getRegAgendaEvento() {
+        return regAgendaEvento;
+    }
+
+    public void setRegAgendaEvento(TAgendaEvento regAgendaEvento) {
+        this.regAgendaEvento = regAgendaEvento;
     }
 
 }

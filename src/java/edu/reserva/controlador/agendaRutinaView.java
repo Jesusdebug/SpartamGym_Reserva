@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+
 /**
  *
  * @author Antonio
@@ -68,11 +69,11 @@ public class agendaRutinaView implements Serializable {
 
     @PostConstruct
     public void cargarlistas() {
-       listaAgendaRutina.addAll(tAgendaRutinaFacadeLocal.findAll());
+        listaAgendaRutina.addAll(tAgendaRutinaFacadeLocal.findAll());
         listaRutina.addAll(tRutinaFacadeLocal.findAll());
         listaEntrenador.addAll(tEntrenadorFacadeLocal.findAll());
         listaAdministrador.addAll(tAdministradorFacadeLocal.findAll());
-      
+
     }
 
     public void registrarAgendaRutina() {
@@ -84,10 +85,11 @@ public class agendaRutinaView implements Serializable {
         regAgendaRutina.setIdadministrador(newAdministrador);
         tAgendaRutinaFacadeLocal.create(regAgendaRutina);
         regAgendaRutina = new TAgendaRutina();
+        
 
     }
-      
-       public void descargaRporteRutinas() {
+
+    public void descargaRporteRutinas() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext context = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
@@ -107,7 +109,7 @@ public class agendaRutinaView implements Serializable {
             os.close();
             facesContext.responseComplete();
         } catch (Exception e) {
-            System.out.println("edu.reserva.controlador.agendaRutinaView.descargaRporteRutinas()"+e.getMessage());
+            System.out.println("edu.reserva.controlador.agendaRutinaView.descargaRporteRutinas()" + e.getMessage());
         }
     }
 
@@ -116,25 +118,18 @@ public class agendaRutinaView implements Serializable {
         gestionRegAgendaRutina = rutina;
     }
 
-    public void eliminarAsig( int idagendaRutina) {
+    public void eliminarAsig(int idagendaRutina) {
         try {
             gestionRegAgendaRutina = tAgendaRutinaFacadeLocal.find(idagendaRutina);
             tAgendaRutinaFacadeLocal.remove(gestionRegAgendaRutina);
             gestionRegAgendaRutina = new TAgendaRutina();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.getExternalContext().redirect("RAgenda.xhtml");
         } catch (Exception e) {
             System.out.println("edu.cidesem.controlador.GestionView.eliminarAsig()" + e.getMessage());
         }
 
     }
-     public void cargarlista() {
-   try {
-                FacesContext fc = FacesContext.getCurrentInstance();
-                    fc.getExternalContext().redirect("RAgenda.xhtml");
-
-         } catch (Exception e) {
-             
-         }
-     }
 
     public List<TAdministrador> getListaAdministrador() {
         return listaAdministrador;

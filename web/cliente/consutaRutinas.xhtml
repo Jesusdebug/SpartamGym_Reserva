@@ -8,11 +8,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
-
-
-        <img src="..." class="card-img-top" alt="..."/>
         <c:forEach items="#{agendaRutinaView.listaRutina}" var="rutina">
-            <div class="card" style="width: 18rem; margin: 20px; float: left">
+            <div class="card" style="width: 18rem; margin: 20px; float: left; background-color: #343a40!important;">
                 <div class="card-body">
                     <h5 class="card-title"> #{rutinaView.nombre}</h5>
                     <div class="card-body">
@@ -32,9 +29,6 @@
                 </div>
             </div> 
         </c:forEach>>
-
-
-
         <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -68,9 +62,6 @@
                                 <h:selectOneMenu  class="form-control" value="#{agendaRutinaView.administradorId}" >
                                     <f:selectItems itemLabel="#{administrador.tusuarioIdUsuario.nombres} #{administrador.tusuarioIdUsuario.apellidos}" itemValue="#{administrador.idadministrador}" var="administrador" value="#{agendaRutinaView.listaAdministrador}"  ></f:selectItems>
                                 </h:selectOneMenu>
-
-
-
                                 <h:commandButton  value="Agendar" action="#{agendaRutinaView.registrarAgendaRutina()}">
                                 </h:commandButton>
                             </h:form>

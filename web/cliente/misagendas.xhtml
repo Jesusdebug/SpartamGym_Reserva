@@ -8,10 +8,10 @@
 
     <ui:composition>
 
-        <div class="container" style="margin-top:30px; text-align: center">
+        <div class="container" style="margin-top:30px; text-align: cente;r">
 
 
-            <table class="table table-dark table-striped">
+            <table class="table table-dark table-striped" >
                 <thead>
                     <tr>
                         <th scope="col">Codigob Agenda rutina</th>
@@ -36,17 +36,10 @@
                                 <td>#{agendarutina.identrenador.tusuarioIdUsuario.nombres}</td>
                                 <td>#{agendarutina.idadministrador.tusuarioIdUsuario.nombres}</td>
                                 <td>
-                                    <!--                                     <a href="RAgenda.xhtml" style="display: none">ir</a>-->
-                                   <h:commandButton  id="btnCancelar" value="Cancelar"  onchange="$('#actualizaDom\\:btnActualiza').click()"  action="#{agendaRutinaView.eliminarAsig(agendarutina.idagendarutina)}"/>
-                                    <h:commandButton id="btnActualiza" value="ir" action="#{agendaRutinaView.cargarlista()}"/>
-                                     
-                                   <!--                                    <button type="button" onclick="$('#actualizaDom\\:btnActualiza').click()"></button>-->
-                                    <button type="button" onclick="$('#actualizaDom\\:btnCancelar').click()">Eliminar</button>
+                                    <h:commandButton  id="btnCancelar"  value="Cancelar" action="#{agendaRutinaView.eliminarAsig(agendarutina.idagendarutina)}"/>
                                 </td>
-
-
-
                             </tr>
+                            
                         </c:forEach>
                     </h:form>
                 </tbody>

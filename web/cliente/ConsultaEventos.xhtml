@@ -9,9 +9,9 @@
 
     <ui:composition>
         <c:forEach  items="#{agendaView.listaEventos}" var="evento">
-            <div class="card" style="width: 18rem; margin: 20px; float: left">
+            <div class="card" style="width: 18rem; margin: 20px; float: left;  background-color: #343a40!important;">
                 <div class="card-body">
-                    <img src="..." class="card-img-top" alt="..."/>
+                 
                     <div class="card-body">
                         <h5 class="card-title">Eventos Spartanos de #{evento.nombre}</h5>
                         <p class="card-text">#{evento.descripcion}</p>
@@ -60,7 +60,7 @@
                             <f:selectItems itemLabel="#{evento.idevento}" itemValue="#{evento.idevento}" var="evento" value="#{agendaView.listaEventos}"  ></f:selectItems>
                     </h:selectOneMenu>
                    
-                        <h:commandButton class="btn btn-danger" action="#{agendaView.agendar()}" value="Agendar"></h:commandButton>
+                        <h:commandButton class="btn btn-danger" action="#{usuariosSesion.agendar()}" value="Agendar"></h:commandButton>
                     </h:form>
 
 

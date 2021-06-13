@@ -70,6 +70,56 @@ public abstract class Email {
         }
 
     }
+    public static void sendNotificacion(String para, String nombres, String Mensaje) {
+        final String user = "adsiwebjava@gmail.com";//cambiará en consecuencia al servidor utilizado
+        final String pass = "adsi2020";
+
+//1st paso) Obtener el objeto de sesión
+        Properties props = new Properties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com"); // envia 
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.port", "25");
+        props.setProperty("mail.smtp.starttls.required", "false");
+        props.setProperty("mail.smtp.auth", "true");
+        props.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, pass);
+            }
+        });
+
+//2nd paso)compose message
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(para));
+            message.setSubject("Recordatorio Claves Ficha 2025320");
+
+            message.setContent(
+                    "<center><img src='https://st2.depositphotos.com/3927429/8215/i/600/depositphotos_82158134-stock-photo-athletic-man-and-woman-with.jpg' title='Ficha 2025320'></center>"
+                    + "<h3> Recordatorio Claves. "
+                    + nombres
+                    + "</h3>"
+                    + "Datos de Ingreso: "
+                    + "<h4> Correo Usuario : "
+                    + para
+                    + "</h4>"
+                    + "<h4> Clave Usuario : "
+                    + Mensaje
+                    + " </h4>", "text/html");
+
+            //3rd paso)send message
+            Transport.send(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     
     public static void send(String para, String sujeto, String mensaje) {
