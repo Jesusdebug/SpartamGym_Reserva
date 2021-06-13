@@ -37,7 +37,7 @@ import edu.reserva.facade.TEventoFacadeLocal;
  */
 @Named(value = "usuariosSesion")
 @SessionScoped
-public class usuariosSesion  implements Serializable{
+public class usuariosSesion implements Serializable {
 
     @EJB
     TAgendaEventoFacadeLocal tAgendaEventoFacadeLocal;
@@ -65,7 +65,8 @@ public class usuariosSesion  implements Serializable{
     private int idUsuario = 0;
     private int eventoId;
     private TAgendaEvento regAgendaEvento = new TAgendaEvento();
-List<agendaView> agenda = new ArrayList<>();
+    List<agendaView> agenda = new ArrayList<>();
+ 
     //metodo contructor
     public usuariosSesion() {
     }
@@ -81,6 +82,7 @@ List<agendaView> agenda = new ArrayList<>();
         tUsuarioFacadeLocal.create(regUsu);
         tRolFacadeLocal.ingresarRol(regUsu.getIdUsuario(), 1);
         regUsu = new TUsuario();
+        bandera="4";
     }
 
     public void crearRol() {
@@ -100,11 +102,11 @@ List<agendaView> agenda = new ArrayList<>();
                     fc.getExternalContext().redirect("administrador/index.xhtml");
 
                 } else {
-                    if (logUsuario.getEstado() == 1 && logUsuario.getIdUsuario().equals(134)) {
+                    if (logUsuario.getEstado() == 1 && logUsuario.getIdUsuario().equals(55)) {
                         FacesContext fc = FacesContext.getCurrentInstance();
                         fc.getExternalContext().redirect("entrenador/index.xhtml");
                     } else {
-                        if (logUsuario.getEstado() == 1 ) {
+                        if (logUsuario.getEstado() == 1) {
                             FacesContext fc = FacesContext.getCurrentInstance();
                             fc.getExternalContext().redirect("cliente/index.xhtml");
                         }
@@ -209,20 +211,20 @@ List<agendaView> agenda = new ArrayList<>();
 
 //notificaciones
     public void agendar() {
-        
-         try {
-             TEvento nuevoEvento = tEventoFacadeLocal.find(eventoId);
-        regAgendaEvento.setIdevento(nuevoEvento);
-        tAgendaEventoFacadeLocal.create(regAgendaEvento);
-        regAgendaEvento = new TAgendaEvento();
-       
+
+        try {
+            TEvento nuevoEvento = tEventoFacadeLocal.find(eventoId);
+            regAgendaEvento.setIdevento(nuevoEvento);
+            tAgendaEventoFacadeLocal.create(regAgendaEvento);
+            regAgendaEvento = new TAgendaEvento();
+
             logUsuario = tUsuarioFacadeLocal.buscarCorreo(correoIn);
             if (logUsuario == null) {
                 bandera = "2";
             } else {
                 String mensaje = "Te has agendado un evento revisa la pagina web";
                 tUsuarioFacadeLocal.edit(logUsuario);
-            Email.sendNotificacion(logUsuario.getCorreo(), logUsuario.getNombres()+" "+logUsuario.getApellidos(), mensaje);
+                Email.sendNotificacion(logUsuario.getCorreo(), logUsuario.getNombres() + " " + logUsuario.getApellidos(), mensaje);
             }
         } catch (Exception e) {
             System.out.println("edu.reserva.controlador.usuariosSesion.recuperarClave()" + e.getMessage());

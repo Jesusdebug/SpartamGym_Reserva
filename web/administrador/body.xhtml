@@ -7,16 +7,7 @@
 
     <ui:composition>
         <div class="container" style="margin-top:30px; text-align: center">
-            <div class="row">
-                <c:forEach items="#{usuariosSesion.logUsuario.TRolCollection}" var="rol">
-                    <a href="../#{rol.nombre}/index.xhtml">
-                        <figure class="figure">
-                            <img src="../imagen/#{rol.nombre}.png" style="height: 60px; width: 60px; margin-top: 10px; margin-right: 10px" class="figure-img img-fluid rounded" alt="#{rol.nombre}."/>
-                            <figcaption class="figure-caption">#{rol.nombre}.</figcaption>
-                        </figure>
-                    </a>
-                </c:forEach>
-            </div>
+         
             <h:form>
                 <h:commandLink   target="_blanck" style="margin-bottom: 10px;" class="btn btn-outline-success" value="Reporte de rutinas" action="#{agendaRutinaView.descargaRporteRutinas()}"/>       
 

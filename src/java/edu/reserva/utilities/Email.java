@@ -21,8 +21,8 @@ import javax.mail.internet.MimeMessage;
 public abstract class Email {
  
     public static void sendClaves(String para, String nombres, String clave) {
-        final String user = "adsiwebjava@gmail.com";//cambiará en consecuencia al servidor utilizado
-        final String pass = "adsi2020";
+        final String user = "rspartamgym@gmail.com";//cambiará en consecuencia al servidor utilizado
+        final String pass = "spartam!123";
 
 //1st paso) Obtener el objeto de sesión
         Properties props = new Properties();
@@ -71,8 +71,8 @@ public abstract class Email {
 
     }
     public static void sendNotificacion(String para, String nombres, String Mensaje) {
-        final String user = "adsiwebjava@gmail.com";//cambiará en consecuencia al servidor utilizado
-        final String pass = "adsi2020";
+        final String user = "rspartamgym@gmail.com";//cambiará en consecuencia al servidor utilizado
+        final String pass = "spartam!123";
 
 //1st paso) Obtener el objeto de sesión
         Properties props = new Properties();

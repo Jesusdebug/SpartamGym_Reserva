@@ -4,7 +4,8 @@
 
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="utf-8"/>
 
@@ -25,11 +26,24 @@
     </h:head>
     <h:body class="hold-transition register-page">
         <div class="register-box">
-            <div class="register-logo">
-                <a href="../index.xhtml"><b>Tu reserva</b>SpartamGym</a>
-            </div>
-
             <div class="card">
+                <div class="register-logo">
+                    <a href="../index.xhtml"><b>Tu reserva</b>SpartamGym</a>
+                </div>
+                <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('4')}">
+                    <div class="alert alert-danger" role="alert">
+                        Usuario Registrado !!!!!
+                    </div>
+                </c:if>
+
+                <c:if test="#{usuariosSesion.bandera.equalsIgnoreCase('5')}">
+                    <div class="alert alert-danger" role="alert">
+                        Usuario no registrado  <br></br>
+                        <strong>Se parte de parte de SpartamGym</strong>!!!!!
+                    </div>
+                </c:if>
+
+
                 <div class="card-body register-card-body">
                     <p class="login-box-msg"><strong>Registrarme</strong></p>
                     <h:form >
